@@ -1,15 +1,14 @@
 <?php
 /**
- * The template for displaying all pages
+ * Template Name: Page - Right Sidebar
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
+ * Page with no sidebar, but still contained within the page margins
+ *
+ * This is the template that displays pages with the sidebar on the right.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package WP_Default_-_Components
+ * @package JDA
  */
 
 get_header(); ?>
@@ -30,8 +29,10 @@ get_header(); ?>
 			endwhile; // End of the loop.
 			?>
 
-		</main>
-	</div>
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
 <?php
 get_sidebar();
+
 get_footer();

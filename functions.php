@@ -46,15 +46,16 @@ function scwd_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'menu-1' => esc_html__( 'Top', 'scwd' ),
+		'top' => esc_html__( 'Top', 'scwd' ),
+		'bottom' => esc_html__( 'Bottom', 'scwd' ),
 		) );
 
 	/**
 	 * Add support for core custom logo.
 	 */
 	add_theme_support( 'custom-logo', array(
-		'height'      => 200,
-		'width'       => 200,
+		'height'      => 300,
+		'width'       => 300,
 		'flex-width'  => true,
 		'flex-height' => true,
 	) );
@@ -112,13 +113,57 @@ function scwd_the_custom_logo() {
  */
 function scwd_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'scwd' ),
-		'id'            => 'sidebar-1',
-		'description'   => '',
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'name'			=> esc_html__( 'Sidebar', 'scwd' ),
+		'id'			=> 'sidebar-1',
+		'description'	=> '',
+		'before_widget'	=> '<section id="%1$s" class="widget %2$s">',
+		'after_widget'	=> '</section>',
+		'before_title'	=> '<h3 class="widget-title">',
+		'after_title'	=> '</h3>',
+	) );
+
+	// Banner (After Header) Widget Area. Single column
+	register_sidebar( array(
+		'name'			=> __( 'Banner', 'scwd' ),
+		'id'			=> 'banner',
+		'description'	=> __( 'Optional section after the header. This is a single column area that spans the full width of the page.', 'scwd' ),
+		'before_widget'	=> '<section id="%1$s" class="widget %2$s clearfix"><div class="container">',
+		'after_widget'	=> '</div><!-- container --></section>',
+		'before_title'	=> '<h3 class="widget-title">',
+		'after_title' 	=> '</h3>',
+	) );
+
+	// Page Top (After Banner) Widget Area.
+	register_sidebar( array(
+		'name'			=> __( 'Page Top', 'scwd' ),
+		'id'			=> 'page-top',
+		'description'	=> __( 'Optional section after the banner. Add 1-4 widgets here to display in columns.', 'scwd' ),
+		'before_widget'	=> '<section id="%1$s" class="widget col-sm-3 clearfix %2$s">',
+		'after_widget'	=> "</section>",
+		'before_title'	=> '<h3 class="widget-title">',
+		'after_title'	=> '</h3>',
+	) );
+
+	// Page Bottom (Before Footer) Widget Area.
+	register_sidebar( array(
+		'name'			=> __( 'Page Bottom', 'scwd' ),
+		'id'			=> 'page-bottom',
+		'description'	=> __( 'Optional section before the footer. Add 1-3 widgets here to display in columns.', 'scwd' ),
+		'before_widget'	=> '<section id="%1$s" class="widget col-sm-4 clearfix %2$s">',
+		'after_widget'	=> "</section>",
+		'before_title'	=> '<h3 class="widget-title">',
+		'after_title'	=> '</h3>',
+	) );
+
+	// Footer Widget Area
+	register_sidebar( array(
+		'name'			=> __( 'Footer Top', 'scwd' ),
+		'id'			=> 'footer-top',
+		'description'	=> __( 'Optional site footer widgets. Add 1-3 widgets here to display in columns.', 'scwd' ),
+		'before_widget'	=> '<section id="%1$s" class="widget col-sm-4 clearfix %2$s">',
+		'after_widget'	=> "</section>",
+		'before_title'	=> '<h3 class="widget-title">',
+		'after_title'	=> '</h3>',
 	) );
 }
 add_action( 'widgets_init', 'scwd_widgets_init' );
@@ -127,11 +172,27 @@ add_action( 'widgets_init', 'scwd_widgets_init' );
  * Enqueue scripts and styles.
  */
 function scwd_scripts() {
+
+	/* Fonts */
+	wp_enqueue_style( 'scwd-google-fonts', '//fonts.googleapis.com/css?family=Open+Sans');
+
+	/* Load Stylesheets */
+	// Bootstrap
+	wp_enqueue_style( 'scwd-bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+	wp_enqueue_style( 'scwd-bootstrap-theme', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css');
+	// Theme Base
+	wp_enqueue_style( 'scwd-theme-base', get_template_directory_uri() . '/assets/css/theme-base.css');
+	// Main Styles
 	wp_enqueue_style( 'scwd-style', get_stylesheet_uri() );
 
+	/* Load Java Scripts */
+	// Bootstrap
+	wp_enqueue_script( 'scwd-bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array('jquery'), '', true );
+	// Navigation
 	wp_enqueue_script( 'scwd-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20151215', true );
-
 	wp_enqueue_script( 'scwd-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
+	// Scripts
+	wp_enqueue_script( 'scwd-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), '', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -158,3 +219,20 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+
+/**
+ * Fix WooCommerce template issue.
+ */
+remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
+
+function scwd_wrapper_start() {
+	echo '<main id="main" class="site-main" role="main">';
+}
+add_action('woocommerce_before_main_content', 'scwd_wrapper_start', 10);
+
+function scwd_wrapper_end() {
+	echo '</main>';
+}
+add_action('woocommerce_after_main_content', 'scwd_wrapper_end', 10);

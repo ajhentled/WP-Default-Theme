@@ -10,11 +10,18 @@
  */
 
 ?>
+			</div><!-- .row -->
+		</div><!-- .container -->
+	</div><!-- .site-content -->
 
-	</div>
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<?php get_template_part( 'components/footer/site', 'info' ); ?>
+	<footer id="colophon" class="site-footer main" role="contentinfo">
+		<div class="container">
+			<div class="row">
+				<?php get_template_part( 'components/footer/site', 'info' ); ?>
+			</div>
+		</div>
 	</footer>
+
 </div>
 <?php wp_footer(); ?>
 

@@ -1,20 +1,19 @@
 <?php
 /**
- * The template for displaying all pages
+ * Template Name: Front Page
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
+ * Page with no sidebar, but still contained within the page margins
+ *
+ * This is the template that displays front page.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package WP_Default_-_Components
+ * @package JDA
  */
 
 get_header(); ?>
 
-	<div id="primary" class="content-area col-sm-8">
+	<div id="primary" class="content-area col-sm-12">
 		<main id="main" class="site-main" role="main">
 
 			<?php
@@ -30,8 +29,10 @@ get_header(); ?>
 			endwhile; // End of the loop.
 			?>
 
-		</main>
-	</div>
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
 <?php
 get_sidebar();
+
 get_footer();
