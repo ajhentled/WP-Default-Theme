@@ -805,7 +805,8 @@ body {
 } */
 
 .widget {
-  padding-bottom: 3em;
+  margin: 0 0 1.5em;
+  /*padding-bottom: 1.5em;*/
 }
 
 h2.widget-title {

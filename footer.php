@@ -15,11 +15,16 @@
 	</div><!-- .site-content -->
 
 	<footer id="colophon" class="site-footer main" role="contentinfo">
-		<div class="container">
-			<div class="row">
-				<?php get_template_part( 'components/footer/site', 'info' ); ?>
-			</div>
-		</div>
+
+		<?php if ( has_nav_menu( 'bottom' ) ) : ?>
+			<div class="navigation-bottom">
+				<div class="container wrap">
+					<?php get_template_part( 'components/navigation/navigation', 'bottom' ); ?>
+				</div><!-- .wrap -->
+			</div><!-- .navigation-top -->
+		<?php endif; ?>
+
+		<?php get_template_part( 'components/footer/site', 'info' ); ?>
 	</footer>
 
 </div>

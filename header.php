@@ -27,22 +27,20 @@
 
 	<header id="masthead" class="site-header main" role="banner">
 		<div class="container">
-			<div class="row">
-				<?php get_template_part( 'components/header/site', 'branding' ); ?>
+			<?php get_template_part( 'components/header/site', 'branding' ); ?>
 
-				<?php scwd_the_custom_logo(); ?>
+			<?php scwd_the_custom_logo(); ?>
 
-				<?php if ( has_nav_menu( 'top' ) ) : ?>
-					<div class="navigation-top">
-						<div class="wrap">
-							<?php get_template_part( 'components/navigation/navigation', 'top' ); ?>
-						</div><!-- .wrap -->
-					</div><!-- .navigation-top -->
-				<?php endif; ?>
-
-				<?php scwd_social_menu(); ?>
-			</div>
+			<?php scwd_social_menu(); ?>
 		</div>
+
+		<?php if ( has_nav_menu( 'top' ) ) : ?>
+			<div class="navigation-top">
+				<div class="container wrap">
+					<?php get_template_part( 'components/navigation/navigation', 'top' ); ?>
+				</div><!-- .wrap -->
+			</div><!-- .navigation-top -->
+		<?php endif; ?>
 	</header>
 
 	<div id="content" class="site-content main">

@@ -24,9 +24,9 @@ html { font-size: 16px; /* 1em */ }
 body { font-family: "Open Sans", sans-serif; }
 a, a:visited { color: #2980B9;
   -webkit-transition: all 0.2s ease-in-out;
-     -moz-transition: all 0.2s ease-in-out;
-       -o-transition: all 0.2s ease-in-out;
-          transition: all 0.2s ease-in-out; }
+	 -moz-transition: all 0.2s ease-in-out;
+	   -o-transition: all 0.2s ease-in-out;
+		  transition: all 0.2s ease-in-out; }
 a:hover { color: #19B798; text-decoration: none; }
 
 /*--------------------------------------------------------------
@@ -36,6 +36,7 @@ a:hover { color: #19B798; text-decoration: none; }
 .alignright { display: inline; float: right; margin-left: 1.5em; }
 .aligncenter { clear: both; display: block; margin-left: auto; margin-right: auto; }
 
+/* For removing bootstrap grid gutter */
 .no-gutter > [class*='col-'] { padding-right:0; padding-left:0; }
 
 /*--------------------------------------------------------------
@@ -46,6 +47,48 @@ a:hover { color: #19B798; text-decoration: none; }
 .full { width: 100%; }
 .main { max-width: 1920px; }
 .container { max-width: 1200px; }
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+.site-header {  }
+	.custom-logo { max-width: 300px; }
+
+.site-title { font-size: 2.5em; /*40px*/ }
+.site-description { font-size: 1.125em; /*18px*/ font-weight: 400; margin: 10px 0; }
+
+.social-links { margin-top: 30px; }
+.social-links a { margin-left: 3px; }
+
+/*--------------------------------------------------------------
+## Navigation
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+### Menu
+--------------------------------------------------------------*/
+.skip-link.screen-reader-text { padding: 0; }
+
+.main-navigation { margin: 15px 0; }
+
+/* Main Navigation */
+ .main-navigation { border-radius: 3px; clear: both; color: #fff; display: block; padding-left: 12px; width: 100%;  }
+.main-navigation, .main-navigation ul li > ul, .main-navigation ul li:hover > ul { background: #16A085; }
+.main-navigation a { color: #fff; display: block; padding: 12px; text-decoration: none;}
+.main-navigation ul { list-style: none; margin: 0; padding-left: 0; }
+.main-navigation ul li:first-child a { border-radius: 3px 0 0 3px; }
+.main-navigation li { float: left; position: relative; }
+.main-navigation li:hover > a { }
+.main-navigation a:hover, .main-navigation .current-menu-item > a, .main-navigation .current-menu-ancestor > a { background: #19B798; }
+
+.main-navigation .menu-item-has-children > a { padding-right: 40px; }
+
+/* Sub Menu */
+.main-navigation ul ul { border-radius: 0 0 3px 3px; top: 100%; }
+/*.main-navigation .sub-menu a { width: 260px; }
+.main-navigation .sub-menu li { border-top: 1px solid #ccc; }
+.main-navigation .sub-menu li:last-child a:hover { border-radius: 0 0 3px 3px; } */
+
+.main-navigation ul ul ul { left: -999em; top: 0; }
 
 /*--------------------------------------------------------------
 # Primary / Content Area
@@ -61,3 +104,13 @@ a:hover { color: #19B798; text-decoration: none; }
 # Footer
 --------------------------------------------------------------*/
 .site-footer {  }
+
+/* Footer Navigation */
+.footer-navigation { background: #2980B9; border-radius: 5px; margin: 15px 0; padding-left: 12px; }
+.footer-navigation ul { margin: 0; padding: 0; text-align: center; }
+.footer-navigation ul li { display: inline-block; float: left; }
+.footer-navigation ul li a { color: #fff; display: block; padding: 12px; }
+.footer-navigation ul a:hover, .footer-navigation .current_page_item a, .footer-navigation .current-menu-item a { background: #3498DB; }
+
+/* Site Info */
+.site-info { background: #222222; color: #fff; font-size: 0.875em; /*14px*/ font-weight: 300; padding: 10px 0;  }
