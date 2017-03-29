@@ -1,7 +1,15 @@
 <div class="site-info">
-	<div class="container">
-		<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'scwd' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'scwd' ), 'WordPress' ); ?></a>
-		<span class="sep"> | </span>
-		<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'scwd' ), 'WP Default - Components', '<a href="http://automattic.com/" rel="designer">Automattic</a>' ); ?>
+	<div class="copyright">
+		<div class="container">
+			<?php
+				$site_info = get_bloginfo( 'description' ) . ' - ' . get_bloginfo( 'name' ) . ' &copy; ' . date( 'Y' );
+
+				if ( get_theme_mod( 'scwd_credits_copyright' ) ) :
+					echo get_theme_mod( 'scwd_credits_copyright' );
+				else :
+					echo $site_info;
+				endif;
+			?>
+		</div>
 	</div>
 </div><!-- .site-info -->

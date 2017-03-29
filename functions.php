@@ -46,8 +46,9 @@ function scwd_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'top' => esc_html__( 'Top', 'scwd' ),
-		'bottom' => esc_html__( 'Bottom', 'scwd' ),
+		'top' => esc_html__( 'Top Menu', 'scwd' ),
+		'bottom' => esc_html__( 'Bottom Menu', 'scwd' ),
+		'social' => esc_html__( 'Social Links Menu', 'scwd' ),
 		) );
 
 	/**
@@ -73,10 +74,10 @@ function scwd_setup() {
 	) );
 
 	// Set up the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'scwd_custom_background_args', array(
+	/*add_theme_support( 'custom-background', apply_filters( 'scwd_custom_background_args', array(
 		'default-color' => 'ffffff',
 		'default-image' => '',
-	) ) );
+	) ) );*/
 }
 endif;
 add_action( 'after_setup_theme', 'scwd_setup' );
@@ -174,12 +175,15 @@ add_action( 'widgets_init', 'scwd_widgets_init' );
 function scwd_scripts() {
 
 	/* Fonts */
-	wp_enqueue_style( 'scwd-google-fonts', '//fonts.googleapis.com/css?family=Open+Sans');
+	wp_enqueue_style( 'scwd-google-fonts', '//fonts.googleapis.com/css?family=Open+Sans' );
+	wp_enqueue_script( 'scwd-fontawesome', 'https://use.fontawesome.com/276cbddacd.js' );
 
 	/* Load Stylesheets */
 	// Bootstrap
 	wp_enqueue_style( 'scwd-bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 	wp_enqueue_style( 'scwd-bootstrap-theme', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css');
+	// Social Menu
+	wp_enqueue_style( 'scwd-social-menu', get_template_directory_uri() . '/assets/css/social-menu.css');
 	// Theme Base
 	wp_enqueue_style( 'scwd-theme-base', get_template_directory_uri() . '/assets/css/theme-base.css');
 	// Main Styles
@@ -218,7 +222,7 @@ require get_template_directory() . '/inc/customizer.php';
 /**
  * Load Jetpack compatibility file.
  */
-require get_template_directory() . '/inc/jetpack.php';
+// require get_template_directory() . '/inc/jetpack.php';
 
 /**
  * Load suggested plugins file to display admin notices.
@@ -233,6 +237,11 @@ require get_template_directory() . '/inc/acf-settings.php';
 /**
  * Fix WooCommerce template issue.
  */
+add_action( 'after_setup_theme', 'scwd_woocommerce_support' );
+function scwd_woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+}
+
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
 
@@ -245,3 +254,12 @@ function scwd_wrapper_end() {
 	echo '</main>';
 }
 add_action('woocommerce_after_main_content', 'scwd_wrapper_end', 10);
+
+
+/**
+ * Adds the Theme Options page to the WordPress admin area
+ */
+function jda_customizer_menu() {
+	add_theme_page( 'Theme Options', 'Theme Options', 'edit_theme_options', 'customize.php' );
+}
+add_action( 'admin_menu', 'jda_customizer_menu' );

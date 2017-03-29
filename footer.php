@@ -25,6 +25,8 @@
 		<?php endif; ?>
 
 		<?php get_template_part( 'components/footer/site', 'info' ); ?>
+
+		<?php get_template_part( 'components/navigation/navigation', 'social' ); ?>
 	</footer>
 
 </div>

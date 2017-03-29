@@ -27,11 +27,12 @@
 
 	<header id="masthead" class="site-header main" role="banner">
 		<div class="container">
-			<?php get_template_part( 'components/header/site', 'branding' ); ?>
 
 			<?php scwd_the_custom_logo(); ?>
 
-			<?php scwd_social_menu(); ?>
+			<?php get_template_part( 'components/header/site', 'branding' ); ?>
+
+			<?php //scwd_social_menu(); ?>
 		</div>
 
 		<?php if ( has_nav_menu( 'top' ) ) : ?>
