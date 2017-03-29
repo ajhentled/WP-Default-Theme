@@ -220,6 +220,15 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require get_template_directory() . '/inc/jetpack.php';
 
+/**
+ * Load suggested plugins file to display admin notices.
+ */
+require get_template_directory() . '/inc/engagewp-plugins.php';
+
+/**
+ * Load acf settings.
+ */
+require get_template_directory() . '/inc/acf-settings.php';
 
 /**
  * Fix WooCommerce template issue.
