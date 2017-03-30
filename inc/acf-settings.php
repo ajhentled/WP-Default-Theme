@@ -1,8 +1,8 @@
 <?php
 /**
- * Get My Blinds ACF PRO Settings.
+ * WP Default - Components ACF PRO Settings.
  *
- * @package scwd
+ * @package WP_Default_-_Components
  */
 
 /* Checks to see if “is_plugin_active” function exists and if not load the php file that includes that function */
@@ -41,7 +41,7 @@ if ( !is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ) {
 
 
 	/* Hide ACF field group menu item */
-	// add_filter('acf/settings/show_admin', '__return_false');
+	add_filter('acf/settings/show_admin', '__return_false');
 
 	/* Include ACF */
 	include_once ( get_stylesheet_directory() . '/lib/advanced-custom-fields-pro/acf.php' );

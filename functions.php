@@ -54,12 +54,17 @@ function scwd_setup() {
 	/**
 	 * Add support for core custom logo.
 	 */
-	add_theme_support( 'custom-logo', array(
+	/*add_theme_support( 'custom-logo', array(
 		'height'      => 300,
 		'width'       => 300,
 		'flex-width'  => true,
 		'flex-height' => true,
-	) );
+	) );*/
+
+	/**
+	 * Add theme support for selective refresh for widgets.
+	 */
+	// add_theme_support( 'customize-selective-refresh-widgets' );
 
 	/*
 	 * Switch default core markup for search form, comment form, and comments
@@ -205,6 +210,16 @@ function scwd_scripts() {
 add_action( 'wp_enqueue_scripts', 'scwd_scripts' );
 
 /**
+ * Enable shortcodes in text widgets.
+ */
+// add_filter('widget_text','do_shortcode');
+
+/**
+ * Disable XML-RPC.
+ */
+// add_filter('xmlrpc_enabled', '__return_false');
+
+/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
@@ -217,7 +232,17 @@ require get_template_directory() . '/inc/extras.php';
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer.php';
+// require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Custom theme options.
+ */
+// require get_template_directory() . '/inc/custom-theme-options.php';
+
+/**
+ * Load acf settings and acf theme settings.
+ */
+// require get_template_directory() . '/inc/acf-settings.php';
 
 /**
  * Load Jetpack compatibility file.
@@ -227,39 +252,19 @@ require get_template_directory() . '/inc/customizer.php';
 /**
  * Load suggested plugins file to display admin notices.
  */
-require get_template_directory() . '/inc/engagewp-plugins.php';
+// require get_template_directory() . '/inc/engagewp-plugins.php';
 
 /**
- * Load acf settings.
+ * Load WooCommerce compatibility.
  */
-require get_template_directory() . '/inc/acf-settings.php';
+// require get_template_directory() . '/inc/wc-compatiblity.php';
 
 /**
- * Fix WooCommerce template issue.
+ * Load custom header.
  */
-add_action( 'after_setup_theme', 'scwd_woocommerce_support' );
-function scwd_woocommerce_support() {
-	add_theme_support( 'woocommerce' );
-}
-
-remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
-remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
-
-function scwd_wrapper_start() {
-	echo '<main id="main" class="site-main" role="main">';
-}
-add_action('woocommerce_before_main_content', 'scwd_wrapper_start', 10);
-
-function scwd_wrapper_end() {
-	echo '</main>';
-}
-add_action('woocommerce_after_main_content', 'scwd_wrapper_end', 10);
-
+// require get_template_directory() . '/inc/custom-header.php';
 
 /**
- * Adds the Theme Options page to the WordPress admin area
+ * Create custom post types and taxomy.
  */
-function jda_customizer_menu() {
-	add_theme_page( 'Theme Options', 'Theme Options', 'edit_theme_options', 'customize.php' );
-}
-add_action( 'admin_menu', 'jda_customizer_menu' );
+// require get_template_directory() . '/inc/custom-post-types.php';

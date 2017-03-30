@@ -68,9 +68,19 @@ function scwd_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
 	$wp_customize->get_control( 'blogname' )->priority = 20;
 
+	$wp_customize->selective_refresh->add_partial( 'blogname', array(
+		'selector' => '.site-title a',
+		'render_callback' => 'scwd_customize_partial_blogname',
+	) );
+
 	// site tagline
 	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
 	$wp_customize->get_control( 'blogdescription' )->priority = 30;
+
+	$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
+		'selector' => '.site-description',
+		'render_callback' => 'scwd_customize_partial_blogdescription',
+	) );
 
 	// hide the tagline?
 	$wp_customize->add_setting( 'scwd_display_title_tagline', array(
@@ -93,61 +103,47 @@ function scwd_customize_register( $wp_customize ) {
 		'priority'		=> 20,
 	) );
 
-	// twitter url
-	$wp_customize->add_setting( 'scwd_twitter', array(
+	// phone number
+	$wp_customize->add_setting( 'scwd_phone', array(
 		'default' => null,
 		'sanitize_callback' => 'scwd_sanitize_text'
 	) );
-	$wp_customize->add_control( 'scwd_twitter', array(
-		'label'		=> __( 'Twitter Profile URL', 'scwd' ),
+	$wp_customize->add_control( 'scwd_phone', array(
+		'label'		=> __( 'Phone Number', 'scwd' ),
 		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_twitter',
+		'settings'	=> 'scwd_phone',
 		'priority'	=> 10,
 	) );
-	// facebook url
-	$wp_customize->add_setting( 'scwd_facebook', array(
+
+	// email address
+	$wp_customize->add_setting( 'scwd_email', array(
 		'default' => null,
 		'sanitize_callback' => 'scwd_sanitize_text'
 	) );
-	$wp_customize->add_control( 'scwd_facebook', array(
-		'label'		=> __( 'Facebook Profile URL', 'scwd' ),
+	$wp_customize->add_control( 'scwd_email', array(
+		'label'		=> __( 'Email Address', 'scwd' ),
 		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_facebook',
+		'settings'	=> 'scwd_email',
 		'priority'	=> 20,
 	) );
-	// google plus url
-	$wp_customize->add_setting( 'scwd_gplus', array(
-		'default' => null,
-		'sanitize_callback' => 'scwd_sanitize_text'
-	) );
-	$wp_customize->add_control( 'scwd_gplus', array(
-		'label'		=> __( 'Google Plus Profile URL', 'scwd' ),
+
+	// cards image uploader
+	$wp_customize->add_setting( 'scwd_footer_logo', array( 'default' => null ) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'scwd_footer_logo', array(
+		'label'		=> __( 'Footer Logo', 'scwd' ),
 		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_gplus',
-		'priority'	=> 30,
-	) );
-	// linkedin url
-	$wp_customize->add_setting( 'scwd_linkedin', array(
-		'default' => null,
-		'sanitize_callback' => 'scwd_sanitize_text'
-	) );
-	$wp_customize->add_control( 'scwd_linkedin', array(
-		'label'		=> __( 'LinkedIn Profile URL', 'scwd' ),
+		'settings'	=> 'scwd_footer_logo',
+		'priority'	=> 80
+	) ) );
+
+	// cards image uploader
+	$wp_customize->add_setting( 'scwd_cards', array( 'default' => null ) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'scwd_cards', array(
+		'label'		=> __( 'Payment Cards', 'scwd' ),
 		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_linkedin',
-		'priority'	=> 40,
-	) );
-	// youtube url
-	$wp_customize->add_setting( 'scwd_youtube', array(
-		'default' => null,
-		'sanitize_callback' => 'scwd_sanitize_text'
-	) );
-	$wp_customize->add_control( 'scwd_youtube', array(
-		'label'		=> __( 'Youtube Profile URL', 'scwd' ),
-		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_youtube',
-		'priority'	=> 50,
-	) );
+		'settings'	=> 'scwd_cards',
+		'priority'	=> 90
+	) ) );
 
 	// credits & copyright
 	$wp_customize->add_setting( 'scwd_credits_copyright', array(
@@ -161,8 +157,95 @@ function scwd_customize_register( $wp_customize ) {
 		'priority'		=> 100,
 		'description'	=> __( 'Displays tagline, site title, copyright, and year by default. Allowed tags: <img>, <a>, <div>, <span>, <blockquote>, <p>, <em>, <strong>, <form>, <input>, <br>, <s>, <i>, <b>', 'scwd' ),
 	) ) );
+
+	$wp_customize->add_section( 'scwd_media_links_section', array(
+		'title'			=> __( 'Media Links', 'scwd' ),
+		'priority'		=> 30,
+	) );
+
+	// twitter url
+	$wp_customize->add_setting( 'scwd_twitter', array(
+		'default' => null,
+		'sanitize_callback' => 'scwd_sanitize_text'
+	) );
+	$wp_customize->add_control( 'scwd_twitter', array(
+		'label'		=> __( 'Twitter Profile URL', 'scwd' ),
+		'section'	=> 'scwd_media_links_section',
+		'settings'	=> 'scwd_twitter',
+		'priority'	=> 10,
+	) );
+
+	// facebook url
+	$wp_customize->add_setting( 'scwd_facebook', array(
+		'default' => null,
+		'sanitize_callback' => 'scwd_sanitize_text'
+	) );
+	$wp_customize->add_control( 'scwd_facebook', array(
+		'label'		=> __( 'Facebook Profile URL', 'scwd' ),
+		'section'	=> 'scwd_media_links_section',
+		'settings'	=> 'scwd_facebook',
+		'priority'	=> 20,
+	) );
+
+	// google plus url
+	$wp_customize->add_setting( 'scwd_gplus', array(
+		'default' => null,
+		'sanitize_callback' => 'scwd_sanitize_text'
+	) );
+	$wp_customize->add_control( 'scwd_gplus', array(
+		'label'		=> __( 'Google Plus Profile URL', 'scwd' ),
+		'section'	=> 'scwd_media_links_section',
+		'settings'	=> 'scwd_gplus',
+		'priority'	=> 30,
+	) );
+
+	// linkedin url
+	$wp_customize->add_setting( 'scwd_linkedin', array(
+		'default' => null,
+		'sanitize_callback' => 'scwd_sanitize_text'
+	) );
+	$wp_customize->add_control( 'scwd_linkedin', array(
+		'label'		=> __( 'LinkedIn Profile URL', 'scwd' ),
+		'section'	=> 'scwd_media_links_section',
+		'settings'	=> 'scwd_linkedin',
+		'priority'	=> 40,
+	) );
+
+	// youtube url
+	$wp_customize->add_setting( 'scwd_youtube', array(
+		'default' => null,
+		'sanitize_callback' => 'scwd_sanitize_text'
+	) );
+	$wp_customize->add_control( 'scwd_youtube', array(
+		'label'		=> __( 'Youtube Profile URL', 'scwd' ),
+		'section'	=> 'scwd_media_links_section',
+		'settings'	=> 'scwd_youtube',
+		'priority'	=> 50,
+	) );
 }
 add_action( 'customize_register', 'scwd_customize_register' );
+
+/**
+ * Render the site title for the selective refresh partial.
+ *
+ * @see scwd_customize_register()
+ *
+ * @return void
+ */
+function scwd_customize_partial_blogname() {
+	bloginfo( 'name' );
+}
+
+/**
+ * Render the site tagline for the selective refresh partial.
+ *
+ * @see scwd_customize_register()
+ *
+ * @return void
+ */
+function scwd_customize_partial_blogdescription() {
+	bloginfo( 'description' );
+}
 
 /**
  * Sanitize checkbox options
@@ -259,3 +342,11 @@ function scwd_customize_preview_js() {
 	wp_enqueue_script( 'scwd_customizer', get_template_directory_uri() . '/assets/js/customizer.js', array( 'customize-preview' ), '20151215', true );
 }
 add_action( 'customize_preview_init', 'scwd_customize_preview_js' );
+
+/**
+ * Adds the Theme Options page to the WordPress admin area
+ */
+function scwd_customizer_menu() {
+	add_theme_page( 'Theme Options', 'Theme Options', 'edit_theme_options', 'customize.php' );
+}
+add_action( 'admin_menu', 'scwd_customizer_menu' );
