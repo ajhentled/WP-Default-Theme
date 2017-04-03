@@ -1,5 +1,5 @@
 <div class="site-branding">
-	<?php if ( get_theme_mod( 'scwd_display_title_tagline' ) === 1 ): ?>
+	<?php if ( get_theme_mod( 'display_title_tagline' ) === 1 ): ?>
 		<?php
 		if ( is_front_page() && is_home() ) : ?>
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>

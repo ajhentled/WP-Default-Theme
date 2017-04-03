@@ -97,13 +97,19 @@ function scwd_register_required_plugins() {
 			'required'  => false,
 		),
 		array(
-			'name'      => 'Wordfence Security',
-			'slug'      => 'wordfence',
+			'name'      => 'Page Builder by SiteOrigin',
+			'slug'      => 'siteorigin-panels',
 			'required'  => false,
 		),
 		array(
-			'name'      => 'Jetpack by WordPress.com',
-			'slug'      => 'jetpack',
+			'name'      => 'SiteOrigin Widgets Bundle',
+			'slug'      => 'so-widgets-bundle',
+			'required'  => false,
+		),
+
+		array(
+			'name'      => 'Wordfence Security',
+			'slug'      => 'wordfence',
 			'required'  => false,
 		),
 		// This is an example of the use of 'is_callable' functionality. A user could - for instance -

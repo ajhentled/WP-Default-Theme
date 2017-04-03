@@ -20,6 +20,13 @@
 		} );
 	} );
 
+	// Copyright
+	wp.customize( 'copyright', function( value ) {
+		value.bind( function( to ) {
+			$( '.copyright' ).text( to );
+		} );
+	} );
+
 	// Header text color.
 	wp.customize( 'header_textcolor', function( value ) {
 		value.bind( function( to ) {

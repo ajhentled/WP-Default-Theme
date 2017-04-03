@@ -724,7 +724,7 @@ body {
 
     .site-content .widget-area {
       float: right;
-      overflow: hidden;
+      /*overflow: hidden;*/
       /*width: 25%;*/
     }
 

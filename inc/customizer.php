@@ -69,8 +69,8 @@ function scwd_customize_register( $wp_customize ) {
 	$wp_customize->get_control( 'blogname' )->priority = 20;
 
 	$wp_customize->selective_refresh->add_partial( 'blogname', array(
-		'selector' => '.site-title a',
-		'render_callback' => 'scwd_customize_partial_blogname',
+		'selector'			=> '.site-title a',
+		'render_callback'	=> 'scwd_customize_partial_blogname',
 	) );
 
 	// site tagline
@@ -78,16 +78,16 @@ function scwd_customize_register( $wp_customize ) {
 	$wp_customize->get_control( 'blogdescription' )->priority = 30;
 
 	$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
-		'selector' => '.site-description',
-		'render_callback' => 'scwd_customize_partial_blogdescription',
+		'selector'			=> '.site-description',
+		'render_callback'	=> 'scwd_customize_partial_blogdescription',
 	) );
 
 	// hide the tagline?
-	$wp_customize->add_setting( 'scwd_display_title_tagline', array(
+	$wp_customize->add_setting( 'display_title_tagline', array(
 		'default'			=> 1,
 		'sanitize_callback'	=> 'scwd_sanitize_checkbox'
 	) );
-	$wp_customize->add_control( 'scwd_display_title_tagline', array(
+	$wp_customize->add_control( 'display_title_tagline', array(
 		'label'		=> __( 'Display Site Title and Tagline', 'scwd' ),
 		'section'	=> 'title_tagline',
 		'priority'	=> 40,
@@ -97,131 +97,90 @@ function scwd_customize_register( $wp_customize ) {
 	/**
 	 * Theme Options
 	 */
-	$wp_customize->add_section( 'scwd_content_section', array(
-		'title'			=> __( 'Theme Options', 'scwd' ),
-		'description'	=> 'Adjust the display of content on your website.',
+	$wp_customize->add_panel( 'theme_options', array(
 		'priority'		=> 20,
+		'capability'	=> 'edit_theme_options',
+		'title'			=> __('Theme Options', 'scwd'),
+		// 'description'	=> __('Customize the content on your website.', 'scwd'),
+	));
+
+	/* General Options */
+	$wp_customize->add_section( 'scwd_general_section', array(
+		'title'			=> __( 'General Options', 'scwd' ),
+		'description'	=> 'Adjust the display of general options on your website.',
+		'panel' 		=> 'theme_options',
+		'priority'		=> 10,
 	) );
 
 	// phone number
-	$wp_customize->add_setting( 'scwd_phone', array(
+	$wp_customize->add_setting( 'phone', array(
 		'default' => null,
 		'sanitize_callback' => 'scwd_sanitize_text'
 	) );
-	$wp_customize->add_control( 'scwd_phone', array(
+	$wp_customize->add_control( 'phone', array(
 		'label'		=> __( 'Phone Number', 'scwd' ),
-		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_phone',
+		'section'	=> 'scwd_general_section',
+		'settings'	=> 'phone',
 		'priority'	=> 10,
 	) );
 
 	// email address
-	$wp_customize->add_setting( 'scwd_email', array(
+	$wp_customize->add_setting( 'email', array(
 		'default' => null,
 		'sanitize_callback' => 'scwd_sanitize_text'
 	) );
-	$wp_customize->add_control( 'scwd_email', array(
+	$wp_customize->add_control( 'email', array(
 		'label'		=> __( 'Email Address', 'scwd' ),
-		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_email',
+		'section'	=> 'scwd_general_section',
+		'settings'	=> 'email',
 		'priority'	=> 20,
 	) );
 
-	// cards image uploader
-	$wp_customize->add_setting( 'scwd_footer_logo', array( 'default' => null ) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'scwd_footer_logo', array(
+	/* Footer Options */
+	$wp_customize->add_section( 'scwd_footer_section', array(
+		'title'			=> __( 'Footer Options', 'scwd' ),
+		'description'	=> 'Adjust the display of footer options on your website.',
+		'panel' 		=> 'theme_options',
+		'priority'		=> 20,
+	) );
+
+	// footer logo uploader
+	$wp_customize->add_setting( 'footer_logo', array( 'default' => null ) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'footer_logo', array(
 		'label'		=> __( 'Footer Logo', 'scwd' ),
-		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_footer_logo',
+		'section'	=> 'scwd_footer_section',
+		'settings'	=> 'footer_logo',
 		'priority'	=> 80
 	) ) );
 
 	// cards image uploader
-	$wp_customize->add_setting( 'scwd_cards', array( 'default' => null ) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'scwd_cards', array(
+	$wp_customize->add_setting( 'payment_cards', array( 'default' => null ) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'payment_cards', array(
 		'label'		=> __( 'Payment Cards', 'scwd' ),
-		'section'	=> 'scwd_content_section',
-		'settings'	=> 'scwd_cards',
+		'section'	=> 'scwd_footer_section',
+		'settings'	=> 'payment_cards',
 		'priority'	=> 90
 	) ) );
 
-	// credits & copyright
-	$wp_customize->add_setting( 'scwd_credits_copyright', array(
+	// copyright
+	$wp_customize->add_setting( 'copyright', array(
 		'default'			=> null,
 		'sanitize_callback'	=> 'scwd_sanitize_textarea',
+		'transport'			=> 'postMessage',
 	) );
 
-	$wp_customize->add_control( new scwd_Customize_Textarea_Control( $wp_customize, 'scwd_credits_copyright', array(
-		'label'			=> __( 'Footer Credits & Copyright', 'scwd' ),
-		'section'		=> 'scwd_content_section',
+	$wp_customize->add_control( new scwd_Customize_Textarea_Control( $wp_customize, 'copyright', array(
+		'label'			=> __( 'Copyright', 'scwd' ),
+		'section'		=> 'scwd_footer_section',
 		'priority'		=> 100,
 		'description'	=> __( 'Displays tagline, site title, copyright, and year by default. Allowed tags: <img>, <a>, <div>, <span>, <blockquote>, <p>, <em>, <strong>, <form>, <input>, <br>, <s>, <i>, <b>', 'scwd' ),
 	) ) );
 
-	$wp_customize->add_section( 'scwd_media_links_section', array(
-		'title'			=> __( 'Media Links', 'scwd' ),
-		'priority'		=> 30,
+	$wp_customize->selective_refresh->add_partial( 'copyright', array(
+		'selector'			=> '.copyright',
+		'render_callback'	=> 'scwd_customize_partial_copyright',
 	) );
 
-	// twitter url
-	$wp_customize->add_setting( 'scwd_twitter', array(
-		'default' => null,
-		'sanitize_callback' => 'scwd_sanitize_text'
-	) );
-	$wp_customize->add_control( 'scwd_twitter', array(
-		'label'		=> __( 'Twitter Profile URL', 'scwd' ),
-		'section'	=> 'scwd_media_links_section',
-		'settings'	=> 'scwd_twitter',
-		'priority'	=> 10,
-	) );
-
-	// facebook url
-	$wp_customize->add_setting( 'scwd_facebook', array(
-		'default' => null,
-		'sanitize_callback' => 'scwd_sanitize_text'
-	) );
-	$wp_customize->add_control( 'scwd_facebook', array(
-		'label'		=> __( 'Facebook Profile URL', 'scwd' ),
-		'section'	=> 'scwd_media_links_section',
-		'settings'	=> 'scwd_facebook',
-		'priority'	=> 20,
-	) );
-
-	// google plus url
-	$wp_customize->add_setting( 'scwd_gplus', array(
-		'default' => null,
-		'sanitize_callback' => 'scwd_sanitize_text'
-	) );
-	$wp_customize->add_control( 'scwd_gplus', array(
-		'label'		=> __( 'Google Plus Profile URL', 'scwd' ),
-		'section'	=> 'scwd_media_links_section',
-		'settings'	=> 'scwd_gplus',
-		'priority'	=> 30,
-	) );
-
-	// linkedin url
-	$wp_customize->add_setting( 'scwd_linkedin', array(
-		'default' => null,
-		'sanitize_callback' => 'scwd_sanitize_text'
-	) );
-	$wp_customize->add_control( 'scwd_linkedin', array(
-		'label'		=> __( 'LinkedIn Profile URL', 'scwd' ),
-		'section'	=> 'scwd_media_links_section',
-		'settings'	=> 'scwd_linkedin',
-		'priority'	=> 40,
-	) );
-
-	// youtube url
-	$wp_customize->add_setting( 'scwd_youtube', array(
-		'default' => null,
-		'sanitize_callback' => 'scwd_sanitize_text'
-	) );
-	$wp_customize->add_control( 'scwd_youtube', array(
-		'label'		=> __( 'Youtube Profile URL', 'scwd' ),
-		'section'	=> 'scwd_media_links_section',
-		'settings'	=> 'scwd_youtube',
-		'priority'	=> 50,
-	) );
 }
 add_action( 'customize_register', 'scwd_customize_register' );
 
@@ -246,6 +205,23 @@ function scwd_customize_partial_blogname() {
 function scwd_customize_partial_blogdescription() {
 	bloginfo( 'description' );
 }
+
+/**
+ * Render the site copyright for the selective refresh partial.
+ *
+ * @see scwd_customize_register()
+ *
+ * @return void
+ */
+function scwd_customize_partial_copyright() {
+	if ( get_theme_mod( 'copyright' ) ) {
+		return get_theme_mod( 'copyright' );
+	}
+
+	return get_bloginfo( 'description' ) . ' - ' . get_bloginfo( 'name' ) . ' &copy; ' . date( 'Y' );
+}
+
+
 
 /**
  * Sanitize checkbox options
@@ -344,9 +320,117 @@ function scwd_customize_preview_js() {
 add_action( 'customize_preview_init', 'scwd_customize_preview_js' );
 
 /**
- * Adds the Theme Options page to the WordPress admin area
+ * Adds the Theme Options menu to the WordPress admin appearance section.
  */
 function scwd_customizer_menu() {
 	add_theme_page( 'Theme Options', 'Theme Options', 'edit_theme_options', 'customize.php' );
 }
 add_action( 'admin_menu', 'scwd_customizer_menu' );
+
+/**
+ * Add the theme options link to the Admin Bar
+ *
+*/
+function scwd_add_theme_options_link() {
+	global $wp_admin_bar, $wpdb;
+
+	if ( !is_super_admin() || !is_admin_bar_showing() )
+		return;
+
+	/* Add the main siteadmin menu item */
+	$wp_admin_bar->add_menu(
+		array(
+			'id' => 'theme_options',
+			'title' => __( 'Theme Options', 'scwd' ),
+			'href' => admin_url('customize.php')
+		)
+	);
+}
+add_action( 'admin_bar_menu', 'scwd_add_theme_options_link', 1000 );
+
+// Check if option exists
+function checkoption( $optname ){
+	if ( empty( $optname ) || $optname == '' )
+		return false;
+
+	// $chkoptions = get_option( 'custom_theme_options' );
+	$chkoptions = get_theme_mods();
+	if ( isset( $chkoptions[$optname] ) && $chkoptions[$optname] != '' )
+		return true;
+}
+
+/**
+ * Displays the specific custom option with parameters
+ *
+ * var   	 Name of the custom option (e.g. ctologourl)
+ * type    text/link/image (Default: text)
+ * text    Link text/Image Alt text
+ * target    Link target
+ * class    CSS class for the output tag
+ * wrapper    Wrapper for the output (Choices: p,div,li,span)
+ * wclass    CSS class for the wrapper tag
+ *
+ */
+function scwd_display_option_func( $atts ){
+	$atts = shortcode_atts( array(
+		'var' => '',
+		'type' => 'text',
+		'text' => '',
+		'target' => '',
+		'class' => '',
+		'wrapper' => '',
+		'wclass' => ''
+	), $atts, 'scwd_option' );
+
+	// $theme_options = get_option( 'custom_theme_options' );
+	$theme_options = get_theme_mods();
+	$resultString = '';
+
+	if ( $atts['var'] != '' ) {
+		if ( !checkoption( $atts['var'] ) ) {
+			return sprintf('<div class="alert alert-danger"><strong>%s</strong></div>', 'Option does not exist or option is empty.');
+		}
+
+		// $resultString = ( (isset($theme_options[$atts['var']]) && $theme_options[$atts['var']] != '') ? $theme_options[$atts['var']] : '' );
+		$resultString = $theme_options[$atts['var']];
+		$tagClass = '';
+		$tagTarget = '';
+		$wrapperClass = '';
+
+		// Build tag class string
+		if ( $atts['class'] != '' )
+			$tagClass = ' class="' . $atts['class'] . '"';
+		// Build target string
+		if ( $atts['target'] != '' )
+			$tagTarget = ' target="' . $atts['target'] . '"';
+
+		if ( $atts['type'] == 'link' ){
+			$resultString = '<a href="' . $resultString . '"' . $tagClass . $tagTarget . '>' . (($atts['text'] != '') ? $atts['text']  : $resultString) . '</a>';
+		} elseif ( $atts['type'] == 'image' ) {
+			$resultString = '<img src="' . $resultString . '" alt="' . $atts['text'] . '"' . $tagClass . '>';
+		}
+
+	// Uncomment to convert newline to <br> in textarea output
+	// $resultString = nl2br($resultString);
+
+		// Build wrapper class string
+		if($atts['wclass'] != '')
+			$wrapperClass = ' class="' . $atts['wclass'] . '"';
+
+		if ( $atts['wrapper'] == 'p' ){
+			$resultString = '<p' . $wrapperClass . '>' . $resultString . '</p>';
+		} elseif ( $atts['wrapper'] == 'div' ) {
+			$resultString = '<div' . $wrapperClass . '>' . $resultString . '</div>';
+		} elseif ( $atts['wrapper'] == 'li' ) {
+			$resultString = '<li' . $wrapperClass . '>' . $resultString . '</li>';
+		} elseif ( $atts['wrapper'] == 'span' ) {
+			$resultString = '<span' . $wrapperClass . '>' . $resultString . '</span>';
+		} elseif ( $atts['wrapper'] == 'strong' ) {
+			$resultString = '<strong' . $wrapperClass . '>' . $resultString . '</strong>';
+		}
+	}
+
+	// Return output
+	return $resultString;
+}
+add_shortcode( 'scwd_option', 'scwd_display_option_func' );

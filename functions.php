@@ -54,17 +54,17 @@ function scwd_setup() {
 	/**
 	 * Add support for core custom logo.
 	 */
-	/*add_theme_support( 'custom-logo', array(
+	add_theme_support( 'custom-logo', array(
 		'height'      => 300,
 		'width'       => 300,
 		'flex-width'  => true,
 		'flex-height' => true,
-	) );*/
+	) );
 
 	/**
 	 * Add theme support for selective refresh for widgets.
 	 */
-	// add_theme_support( 'customize-selective-refresh-widgets' );
+	add_theme_support( 'customize-selective-refresh-widgets' );
 
 	/*
 	 * Switch default core markup for search form, comment form, and comments
@@ -181,7 +181,7 @@ function scwd_scripts() {
 
 	/* Fonts */
 	wp_enqueue_style( 'scwd-google-fonts', '//fonts.googleapis.com/css?family=Open+Sans' );
-	wp_enqueue_script( 'scwd-fontawesome', 'https://use.fontawesome.com/276cbddacd.js' );
+	wp_enqueue_style( 'scwd-font-awesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css');
 
 	/* Load Stylesheets */
 	// Bootstrap
@@ -232,7 +232,7 @@ require get_template_directory() . '/inc/extras.php';
 /**
  * Customizer additions.
  */
-// require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/customizer.php';
 
 /**
  * Custom theme options.
@@ -240,29 +240,14 @@ require get_template_directory() . '/inc/extras.php';
 // require get_template_directory() . '/inc/custom-theme-options.php';
 
 /**
- * Load acf settings and acf theme settings.
- */
-// require get_template_directory() . '/inc/acf-settings.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-// require get_template_directory() . '/inc/jetpack.php';
-
-/**
  * Load suggested plugins file to display admin notices.
  */
-// require get_template_directory() . '/inc/engagewp-plugins.php';
+require get_template_directory() . '/inc/engagewp-plugins.php';
 
 /**
  * Load WooCommerce compatibility.
  */
 // require get_template_directory() . '/inc/wc-compatiblity.php';
-
-/**
- * Load custom header.
- */
-// require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Create custom post types and taxomy.

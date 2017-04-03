@@ -1,11 +1,11 @@
 <div class="site-info">
-	<div class="copyright">
-		<div class="container">
+	<div class="container">
+		<div class="copyright">
 			<?php
 				$site_info = get_bloginfo( 'description' ) . ' - ' . get_bloginfo( 'name' ) . ' &copy; ' . date( 'Y' );
 
-				if ( get_theme_mod( 'scwd_credits_copyright' ) ) :
-					echo get_theme_mod( 'scwd_credits_copyright' );
+				if ( get_theme_mod( 'copyright' ) ) :
+					echo get_theme_mod( 'copyright' );
 				else :
 					echo $site_info;
 				endif;
