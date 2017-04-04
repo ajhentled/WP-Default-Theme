@@ -173,7 +173,7 @@ function scwd_customize_register( $wp_customize ) {
 		'label'			=> __( 'Copyright', 'scwd' ),
 		'section'		=> 'scwd_footer_section',
 		'priority'		=> 100,
-		'description'	=> __( 'Displays tagline, site title, copyright, and year by default. Allowed tags: <img>, <a>, <div>, <span>, <blockquote>, <p>, <em>, <strong>, <form>, <input>, <br>, <s>, <i>, <b>', 'scwd' ),
+		// 'description'	=> __( 'Displays tagline, site title, copyright, and year by default. Allowed tags: <img>, <a>, <div>, <span>, <blockquote>, <p>, <em>, <strong>, <form>, <input>, <br>, <s>, <i>, <b>', 'scwd' ),
 	) ) );
 
 	$wp_customize->selective_refresh->add_partial( 'copyright', array(
@@ -318,6 +318,16 @@ function scwd_customize_preview_js() {
 	wp_enqueue_script( 'scwd_customizer', get_template_directory_uri() . '/assets/js/customizer.js', array( 'customize-preview' ), '20151215', true );
 }
 add_action( 'customize_preview_init', 'scwd_customize_preview_js' );
+
+
+/**
+ * Remove the additional CSS section, introduced in 4.7, from the Customizer.
+ * @param $wp_customize WP_Customize_Manager
+ */
+function scwd_remove_css_section( $wp_customize ) {
+	$wp_customize->remove_section( 'custom_css' );
+}
+add_action( 'customize_register', 'scwd_remove_css_section', 15 );
 
 /**
  * Adds the Theme Options menu to the WordPress admin appearance section.

@@ -34,7 +34,6 @@
 				</div>
 				<div class="col-sm-6">
 					<?php get_template_part( 'components/navigation/navigation', 'social' ); ?>
-					<?php //scwd_social_menu(); ?>
 				</div>
 			</div>
 		</div>
@@ -47,6 +46,14 @@
 			</div><!-- .navigation-top -->
 		<?php endif; ?>
 	</header>
+
+	<?php if ( is_active_sidebar( 'banner' ) && is_front_page() ) : ?>
+		<div id="banner" class="widget-area clearfix" >
+			<?php dynamic_sidebar( 'banner' ); ?>
+		</div><!-- .widget-area -->
+	<?php endif; ?>
+
+	<?php get_template_part( 'components/page/content', 'page-top' ) ?>
 
 	<div id="content" class="site-content main">
 		<div class="container">

@@ -14,6 +14,8 @@
 		</div><!-- .container -->
 	</div><!-- .site-content -->
 
+	<?php get_template_part( 'components/page/content', 'page-bottom' ); ?>
+
 	<footer id="colophon" class="site-footer main" role="contentinfo">
 
 		<?php if ( has_nav_menu( 'bottom' ) ) : ?>

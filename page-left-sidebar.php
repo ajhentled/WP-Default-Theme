@@ -2,8 +2,6 @@
 /**
  * Template Name: Page - Left Sidebar
  *
- * Page with no sidebar, but still contained within the page margins
- *
  * This is the template that displays pages with the sidebar on the left.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy

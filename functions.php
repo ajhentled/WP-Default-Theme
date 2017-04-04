@@ -160,17 +160,6 @@ function scwd_widgets_init() {
 		'before_title'	=> '<h3 class="widget-title">',
 		'after_title'	=> '</h3>',
 	) );
-
-	// Footer Widget Area
-	register_sidebar( array(
-		'name'			=> __( 'Footer Top', 'scwd' ),
-		'id'			=> 'footer-top',
-		'description'	=> __( 'Optional site footer widgets. Add 1-3 widgets here to display in columns.', 'scwd' ),
-		'before_widget'	=> '<section id="%1$s" class="widget col-sm-4 clearfix %2$s">',
-		'after_widget'	=> "</section>",
-		'before_title'	=> '<h3 class="widget-title">',
-		'after_title'	=> '</h3>',
-	) );
 }
 add_action( 'widgets_init', 'scwd_widgets_init' );
 

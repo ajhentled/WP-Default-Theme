@@ -1,10 +1,9 @@
 <?php
 /**
- * Template Name: Front Page
+ * The front page template file
  *
- * Page with no sidebar, but still contained within the page margins
- *
- * This is the template that displays front page.
+ * If the user has selected a static page for their homepage, this is what will
+ * appear.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -33,6 +32,6 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 
 get_footer();
