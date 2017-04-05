@@ -224,6 +224,11 @@ require get_template_directory() . '/inc/extras.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
+ * Theme options shortcode generator.
+ */
+require get_template_directory() . '/inc/options-shortcode-generator.php';
+
+/**
  * Custom theme options.
  */
 // require get_template_directory() . '/inc/custom-theme-options.php';
