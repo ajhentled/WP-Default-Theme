@@ -115,118 +115,6 @@ function scwd_shortcode_generator_page() { ?>
 				</div>
 			</form>
 		</div>
-
-		<?php /*
-		<form id="scwd-generator-form">
-			<table class="form-table">
-				<tbody>
-					<tr valign="top">
-						<th scope="row">Variable</th>
-						<td>
-							<select name="variable">
-								<option value="">Select Option</option>
-								<?php foreach ( get_theme_mods() as $key => $option ):
-									if ( $option ): ?>
-										<option value="<?php _e( $option ); ?>"><?php _e( $key ); ?></option>
-									<?php endif;
-								endforeach ?>
-							</select>
-						</td>
-					</tr>
-					<tr valign="top">
-						<th scope="row">Variable Value</th>
-						<td>
-							<!-- <textarea name="variable_value" id="variable-value" class="regular-text code" readonly></textarea> -->
-							<input type="text" name="variable_value" id="variable-value" class="regular-text code" readonly>
-						</td>
-					</tr>
-					<tr valign="top">
-						<th scope="row">Wrapper</th>
-						<td>
-							<select name="wrapper">
-								<option value="">Select Option</option>
-								<option value="p">p</option>
-								<option value="div">div</option>
-								<option value="li">li</option>
-								<option value="span">span</option>
-								<option value="strong">strong</option>
-								<option value="del">del</option>
-								<option value="ins">ins</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<th class="scope">Wrapper Class</th>
-						<td><input type="text" name="wrapper_class" class="regular-text code"></td>
-					</tr>
-					<tr>
-						<th class="scope">Type</th>
-						<td>
-							<select name="type">
-								<option value="text">text</option>
-								<option value="link">link</option>
-								<option value="image">image</option>
-							</select>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<table id="link-fields" class="form-table additional-fields hidden">
-				<tbody>
-					<tr>
-						<th scope="row">Class</th>
-						<td><input type="text" name="class" class="regular-text code"></td>
-					</tr>
-					<tr>
-						<th scope="row">Text Link</th>
-						<td><input type="text" name="text_link" class="regular-text code"></td>
-					</tr>
-					<tr>
-						<th scope="row">Target</th>
-						<td>
-							<select name="target">
-								<option value="">None</option>
-								<option value="_blank">blank</option>
-								<option value="_self">self</option>
-								<option value="_parent">parent</option>
-								<option value="_top">top</option>
-							</select>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<table id="img-fields" class="form-table additional-fields hidden">
-				<tbody>
-					<tr>
-						<th scope="row">Class</th>
-						<td><input type="text" name="class" class="regular-text code"></td>
-					</tr>
-					<tr>
-						<th scope="row">Alt Text</th>
-						<td><input type="text" name="alttext" class="regular-text code"></td>
-					</tr>
-				</tbody>
-			</table>
-
-			<div class="submit">
-				<input type="submit" name="submit" id="submit" class="button button-primary" value="Generate Shortcode">
-			</div>
-
-			<table id="shortcode-result" class="form-table hidden">
-				<tr>
-					<th scope="row">Shortcode</th>
-					<td><input type="text" name="shortcode" id="generated-shortcode" class="large-text code" readonly></td>
-				</tr>
-				<tr>
-					<th scope="row">Include to template</th>
-					<td><textarea name="tpl_code" id="tpl-code" class="large-text code" rows="5" readonly></textarea></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	*/ ?>
 <?php }
 
 function scwd_shortcode_generator_enqueue_scripts() {
@@ -237,6 +125,7 @@ function scwd_shortcode_generator_enqueue_scripts() {
 
 		//Enqueue the jQuery UI theme css file from google:
 		wp_enqueue_style('scwd-bootstrao-iso', get_template_directory_uri() .'/assets/css/bootstrap-iso.css');
+		wp_enqueue_style('scwd-admin-styles', get_template_directory_uri() .'/assets/css/admin-styles.css');
 	}
 
 }

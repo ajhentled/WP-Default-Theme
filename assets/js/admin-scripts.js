@@ -7,6 +7,19 @@
 
 ( function( $ ) {
 	'use strict';
+	/**
+	 * Show flash message
+	 * @param  string message
+	 */
+	function show_flash_message( message ) {
+		var alert = '<div class="gmb-flash-msg col-sm-3 col-sm-offset-9"><div class="alert alert-success text-center"><strong>'+message+'</strong></div>';
+		$('.gmb-flash-msg').remove();
+		$('.bootstrap-iso').append( alert );
+		$('.gmb-flash-msg').fadeIn();
+		setTimeout( function() {
+			$('.gmb-flash-msg').fadeOut();
+		}, 1000);
+	}
 
 	// Check if DOM is ready.
 	$(function() {
@@ -51,29 +64,30 @@
 					target 		= $('[name="target"]').val() ? 'target="'+$('[name="target"]').val()+'"' : '',
 					link_class 	= $('[name="link_class"]').val() ? 'class="'+$('[name="link_class"]').val()+'"' : '';
 
-				atts += ' text="' + text_link + '" ' + target + ' ' +  link_class;
+				atts += 'text="' + text_link + '" ' + target + ' ' +  link_class;
 			} else if ( type === 'image' ) {
 				var alttext 	= $('[name="alttext"]').val() ? $('[name="alttext"]').val() : '',
 					img_class 	= $('[name="img_class"]').val() ? 'class="'+$('[name="img_class"]').val()+'"' : '';
 
-				atts += ' text="'+alttext+'" ' +  img_class;
+				atts += 'text="'+alttext+'" ' +  img_class;
 			}
 
-			var shortcode 	= '[scwd_option ' + $.trim( atts )  + ']',
+			var shortcode 	= '[scwd_option ' + $.trim( atts.replace(/  +/g, ' ') )  + ']',
 				tpl_code	= '';
 
-			tpl_code += '&lt;?php if ( checkoption( \'' + variable + '\' ) ): ?&gt\n';
-			tpl_code += '&lt;?php echo do_shortcode(\'' + shortcode + '\'); ?&gt\n';
-			tpl_code += '&lt;?php endif; ?&gt';
+			tpl_code += '&lt;?php if ( checkoption( \'' + variable + '\' ) ): \n';
+			tpl_code += '	echo do_shortcode(\'' + shortcode + '\');\n';
+			tpl_code += 'endif; ?&gt';
 
 			$('#shortcode-result').show();
-			$('#generated-shortcode').val( $.trim( shortcode ) );
+			$('#generated-shortcode').val( shortcode );
 			$('#tpl-code').html( tpl_code );
 		})
 		.on('click', '#generated-shortcode, #tpl-code', function (e) {
 			e.preventDefault();
 			$(this).select();
 			document.execCommand("copy");
+			show_flash_message("Copied to clipboard");
 		});
 	});
 
