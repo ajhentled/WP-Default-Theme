@@ -3,7 +3,7 @@
  * Contains link icons and navigation format.
  */
 .social-navigation ul { display: block; margin: 0 0 1.5em; padding: 0; }
-.social-navigation li { display: inline-block; margin: 0; line-height: 1; }
+.social-navigation li { display: inline-block; margin: 0; line-height: 1; text-align: center; }
 .social-navigation a { border: 0; height: 1em; text-decoration: none; width: 1em; }
 .social-navigation a:before { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; display: inline-block; font-family: "FontAwesome"; font-size: 1.5em; font-style: normal; font-weight: normal; height: 1.5em; line-height: 1; speak: none; text-decoration: inherit; vertical-align: top; width: 1.5em; }
 

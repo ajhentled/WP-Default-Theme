@@ -10,4 +10,4 @@
 /*--------------------------------------------------------------
 # Flash Message
 --------------------------------------------------------------*/
-.gmb-flash-msg { bottom: 0; display: none; padding: 0 !important; position: absolute !important; }
+.gmb-flash-msg { display: none; padding: 0 !important; position: absolute !important; top: -50px; }

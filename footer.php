@@ -11,7 +11,7 @@
 
 ?>
 			</div><!-- .row -->
-		</div><!-- .container -->
+		</div><!-- .container-fluid -->
 	</div><!-- .site-content -->
 
 	<?php get_template_part( 'components/page/content', 'page-bottom' ); ?>
@@ -20,7 +20,7 @@
 
 		<?php if ( has_nav_menu( 'bottom' ) ) : ?>
 			<div class="navigation-bottom">
-				<div class="container wrap">
+				<div class="container-fluid wrap">
 					<?php get_template_part( 'components/navigation/navigation', 'bottom' ); ?>
 				</div><!-- .wrap -->
 			</div><!-- .navigation-top -->

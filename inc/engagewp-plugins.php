@@ -92,26 +92,35 @@ function scwd_register_required_plugins() {
 
 		// This is an example of how to include a plugin from the WordPress Plugin Repository.
 		array(
-			'name'      => 'Smart Slider 3',
-			'slug'      => 'smart-slider-3',
-			'required'  => false,
+			'name'		=> 'Smart Slider 3',
+			'slug'		=> 'smart-slider-3',
+			'required'	=> false,
 		),
 		array(
-			'name'      => 'Page Builder by SiteOrigin',
-			'slug'      => 'siteorigin-panels',
-			'required'  => false,
+			'name'		=> 'Page Builder by SiteOrigin',
+			'slug'		=> 'siteorigin-panels',
+			'required'	=> false,
 		),
 		array(
-			'name'      => 'SiteOrigin Widgets Bundle',
-			'slug'      => 'so-widgets-bundle',
-			'required'  => false,
+			'name'		=> 'SiteOrigin Widgets Bundle',
+			'slug'		=> 'so-widgets-bundle',
+			'required'	=> false,
 		),
-
 		array(
-			'name'      => 'Wordfence Security',
-			'slug'      => 'wordfence',
-			'required'  => false,
+			'name'		=> 'Contact Form 7',
+			'slug'		=> 'contact-form-7',
+			'required'	=> false,
 		),
+		array(
+			'name'		=> 'Wordfence Security',
+			'slug'		=> 'wordfence',
+			'required'	=> false,
+		),
+		/*array(
+			'name'		=> 'Better Search Replace',
+			'slug'		=> 'better-search-replace',
+			'required'	=> false,
+		),*/
 		// This is an example of the use of 'is_callable' functionality. A user could - for instance -
 		// have WPSEO installed *or* WPSEO Premium. The slug would in that last case be different, i.e.
 		// 'wordpress-seo-premium'.

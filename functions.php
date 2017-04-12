@@ -88,6 +88,64 @@ endif;
 add_action( 'after_setup_theme', 'scwd_setup' );
 
 /**
+ * Removes the unnecessary WP tags from the document header.
+ */
+function scwd_clean_up_wp_head() {
+	// Removes the “generator” meta tag from the document header
+	remove_action('wp_head', 'wp_generator');
+	// Removes the “wlwmanifest” link
+	remove_action('wp_head', 'wlwmanifest_link');
+	// The RSD is an API to edit your blog from external services and clients
+	remove_action('wp_head', 'rsd_link');
+	// “wp_shortlink_wp_head” adds a “shortlink” into your document head that will look like http://example.com/?p=ID
+	remove_action('wp_head', 'wp_shortlink_wp_head');
+	// Removes a link to the next and previous post from the document header.
+	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10);
+	// Removes the generator name from the RSS feeds.
+	add_filter('the_generator', '__return_false');
+	// Disable WordPress Emoticons
+	remove_action('wp_head', 'print_emoji_detection_script', 7);
+	remove_action('wp_print_styles', 'print_emoji_styles');
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	// Disable REST API link tag
+	remove_action('wp_head', 'rest_output_link_wp_head', 10);
+	// Disable oEmbed Discovery Links
+	remove_action('wp_head', 'wp_oembed_add_discovery_links', 10);
+	// Disable REST API link in HTTP headers
+	remove_action('template_redirect', 'rest_output_link_header', 11, 0);
+}
+add_action('after_setup_theme', 'scwd_clean_up_wp_head');
+
+/**
+ * Redirecting and 404ing unnecessary pages
+ *
+ * If it is an attachment page (most likely an image) we redirect to the page that is referencing to that image.
+ * If the image is an orphan we just return 404.
+ */
+function scwd_template_redirect () {
+	global $wp_query, $post;
+
+	if ( is_attachment() ) {
+		$post_parent = $post->post_parent;
+
+		if ( $post_parent ) {
+			wp_redirect( get_permalink($post->post_parent), 301 );
+			exit;
+		}
+
+		$wp_query->set_404();
+
+		return;
+	}
+
+	if ( is_author() || is_date() ) {
+		$wp_query->set_404();
+	}
+}
+add_action( 'template_redirect', 'scwd_template_redirect' );
+
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
@@ -120,7 +178,7 @@ function scwd_the_custom_logo() {
 function scwd_widgets_init() {
 	register_sidebar( array(
 		'name'			=> esc_html__( 'Sidebar', 'scwd' ),
-		'id'			=> 'sidebar-1',
+		'id'			=> 'sidebar',
 		'description'	=> '',
 		'before_widget'	=> '<section id="%1$s" class="widget %2$s">',
 		'after_widget'	=> '</section>',
@@ -133,8 +191,8 @@ function scwd_widgets_init() {
 		'name'			=> __( 'Banner', 'scwd' ),
 		'id'			=> 'banner',
 		'description'	=> __( 'Optional section after the header. This is a single column area that spans the full width of the page.', 'scwd' ),
-		'before_widget'	=> '<section id="%1$s" class="widget %2$s clearfix"><div class="container">',
-		'after_widget'	=> '</div><!-- container --></section>',
+		'before_widget'	=> '<section id="%1$s" class="widget %2$s clearfix"><div class="container-fluid">',
+		'after_widget'	=> '</div><!-- container-fluid --></section>',
 		'before_title'	=> '<h3 class="widget-title">',
 		'after_title' 	=> '</h3>',
 	) );

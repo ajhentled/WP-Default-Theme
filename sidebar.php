@@ -7,11 +7,11 @@
  * @package WP_Default_-_Components
  */
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+if ( ! is_active_sidebar( 'sidebar' ) ) {
 	return;
 }
 ?>
 
 <aside id="secondary" class="secondary widget-area col-sm-4" role="complementary">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	<?php dynamic_sidebar( 'sidebar' ); ?>
 </aside>

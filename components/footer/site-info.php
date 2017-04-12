@@ -1,5 +1,5 @@
 <div class="site-info">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="copyright">
 			<?php
 				$site_info = get_bloginfo( 'description' ) . ' - ' . get_bloginfo( 'name' ) . ' &copy; ' . date( 'Y' );

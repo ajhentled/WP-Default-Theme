@@ -26,7 +26,7 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'scwd' ); ?></a>
 
 	<header id="masthead" class="site-header main" role="banner">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-6">
 					<?php scwd_the_custom_logo(); ?>
@@ -40,7 +40,7 @@
 
 		<?php if ( has_nav_menu( 'top' ) ) : ?>
 			<div class="navigation-top">
-				<div class="container wrap">
+				<div class="container-fluid wrap">
 					<?php get_template_part( 'components/navigation/navigation', 'top' ); ?>
 				</div><!-- .wrap -->
 			</div><!-- .navigation-top -->
@@ -56,5 +56,5 @@
 	<?php get_template_part( 'components/page/content', 'page-top' ) ?>
 
 	<div id="content" class="site-content main">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">

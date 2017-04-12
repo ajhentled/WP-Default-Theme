@@ -6,7 +6,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package JDA
+ * @package WP_Default_-_Components
  */
 
 get_header(); ?>
