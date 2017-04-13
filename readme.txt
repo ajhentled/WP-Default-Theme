@@ -1,4 +1,4 @@
-=== WP Default - Components ===
+=== WP Default ===
 
 Contributors:
 Tags:
@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-A custom wordpress theme for WP Default - Components
+A custom wordpress theme for WP Default
 
 == Installation ==
 
@@ -23,7 +23,7 @@ A custom wordpress theme for WP Default - Components
 
 = Does this theme support any plugins? =
 
-WP Default - Components includes support for Jetpack's Infinite Scroll as well as other features.
+WP Default includes support for Jetpack's Infinite Scroll as well as other features.
 
 == Changelog ==
 

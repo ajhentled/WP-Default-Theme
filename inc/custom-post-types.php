@@ -1,8 +1,8 @@
 <?php
 /**
- * WP Default - Components Custom Post Types Sample
+ * WP Default Custom Post Types Sample
  *
- * @package WP_Default_-_Components
+ * @package WP_Default
  */
 function scwd_create_post_type() {
 	$labels = array(

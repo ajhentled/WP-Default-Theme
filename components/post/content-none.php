@@ -4,7 +4,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package WP_Default_-_Components
+ * @package WP_Default
  */
 
 ?>

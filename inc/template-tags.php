@@ -4,7 +4,7 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package WP_Default_-_Components
+ * @package WP_Default
  */
 
 if ( ! function_exists( 'scwd_posted_on' ) ) :

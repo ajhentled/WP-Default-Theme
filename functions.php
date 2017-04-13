@@ -1,10 +1,10 @@
 <?php
 /**
- * WP Default - Components functions and definitions
+ * WP Default functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package WP_Default_-_Components
+ * @package WP_Default
  */
 
 if ( ! function_exists( 'scwd_setup' ) ) :

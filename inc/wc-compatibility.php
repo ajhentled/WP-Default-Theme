@@ -1,8 +1,8 @@
 <?php
 /**
- * WP Default - Components WooCommerce Compatibility Settings
+ * WP Default WooCommerce Compatibility Settings
  *
- * @package WP_Default_-_Components
+ * @package WP_Default
  */
 
 /**

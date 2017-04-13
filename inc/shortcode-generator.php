@@ -1,8 +1,8 @@
 <?php
 /**
- * WP Default - Components Options Shortcode Generator
+ * WP Default Options Shortcode Generator
  *
- * @package WP_Default_-_Components
+ * @package WP_Default
  */
 
 /**
@@ -20,7 +20,7 @@ function scwd_shortcode_generator_page() { ?>
 		<h1>Shortcode Generator</h1>
 		<br>
 		<div class="bootstrap-iso">
-			<form id="scwd-generator-form" action="" method="post" class="container-fluid no-gutter">
+			<form id="scwd-generator-form" action="" method="post" class="container-fluid scwd-form">
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
@@ -107,8 +107,8 @@ function scwd_shortcode_generator_page() { ?>
 								<input type="text" name="shortcode" id="generated-shortcode" class="form-control" readonly>
 							</div>
 							<div class="form-group">
-							  <label for="tpl-code">Template Code</label>
-							  <textarea class="form-control" name="tpl-code" id="tpl-code" rows="5" readonly></textarea>
+								<label for="tpl-code">Template Code</label>
+								<textarea class="form-control" name="tpl-code" id="tpl-code" rows="5" readonly></textarea>
 							</div>
 						</div>
 					</div>
