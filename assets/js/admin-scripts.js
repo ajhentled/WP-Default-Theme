@@ -55,16 +55,17 @@
 			e.preventDefault();
 			var variable	= $('[name="variable"] option:selected').val() ? $('[name="variable"] option:selected').text() : '',
 				wrapper 	= $('[name="wrapper"]').val() ? 'wrapper="'+$('[name="wrapper"]').val()+'"' : '',
-				wclass 		= $('[name="wrapper_class"]').val() ? 'wclass="'+$('[name="wrapper_class"]').val()+'"' : '',
+				wclass 		= ( $('[name="wrapper_class"]').val() && wrapper ) ? 'wclass="'+$('[name="wrapper_class"]').val()+'"' : '',
 				type 		= $('[name="type"]').val() ? $('[name="type"]').val() : '',
 				atts 		= 'var="' + variable + '" type="' + type + '" ' + wrapper + ' ' + wclass + ' ';
 
 			if ( type === 'link' ) {
 				var text_link 	= $('[name="text_link"]').val() ? $('[name="text_link"]').val() : '',
 					target 		= $('[name="target"]').val() ? 'target="'+$('[name="target"]').val()+'"' : '',
+					link_type 	= $('[name="link_type"]').val() ? 'link_type="'+$('[name="link_type"]').val()+'"' : '',
 					link_class 	= $('[name="link_class"]').val() ? 'class="'+$('[name="link_class"]').val()+'"' : '';
 
-				atts += 'text="' + text_link + '" ' + target + ' ' +  link_class;
+				atts += 'text="' + text_link + '" ' + target + ' ' + link_type + ' ' + link_class;
 			} else if ( type === 'image' ) {
 				var alttext 	= $('[name="alttext"]').val() ? $('[name="alttext"]').val() : '',
 					img_class 	= $('[name="img_class"]').val() ? 'class="'+$('[name="img_class"]').val()+'"' : '';

@@ -29,7 +29,15 @@
 		<?php get_template_part( 'components/footer/site', 'info' ); ?>
 
 	</footer>
-
+<?php if ( checkoption( 'phone' ) ):
+	echo do_shortcode('[scwd_option var="phone" type="link" wrapper="div" wclass="wclass" text="" target="_blank" link_type="phone" class="myclass"]');
+endif; ?>
+<?php if ( checkoption( 'phone' ) ):
+	echo do_shortcode('[scwd_option var="phone" type="link" wrapper="div" wclass="wclass" text="" target="_blank" link_type="email" class="myclass"]');
+endif; ?>
+<?php if ( checkoption( 'phone' ) ):
+	echo do_shortcode('[scwd_option var="phone" type="link" wclass="wclass" text="" target="_blank" link_type="email" class="myclass"]');
+endif; ?>
 </div>
 <?php wp_footer(); ?>
 

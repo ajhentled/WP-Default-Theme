@@ -66,6 +66,14 @@ function scwd_shortcode_generator_page() { ?>
 
 						<div id="link-fields" class="additional-fields collapse">
 							<div class="form-group">
+								<label for="link-type">Link Type</label>
+								<select name="link_type" id="link-type" class="form-control">
+									<option value="">None</option>
+									<option value="email">Email</option>
+									<option value="phone">Phone</option>
+								</select>
+							</div>
+							<div class="form-group">
 								<label for="link-class">Class</label>
 								<input type="text" name="link_class" id="link-class" class="form-control">
 							</div>

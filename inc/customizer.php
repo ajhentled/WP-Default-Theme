@@ -221,8 +221,6 @@ function scwd_customize_partial_copyright() {
 	return get_bloginfo( 'description' ) . ' - ' . get_bloginfo( 'name' ) . ' &copy; ' . date( 'Y' );
 }
 
-
-
 /**
  * Sanitize checkbox options
  */
@@ -385,6 +383,7 @@ function scwd_display_option_func( $atts ){
 	$atts = shortcode_atts( array(
 		'var' => '',
 		'type' => 'text',
+		'link_type' => '',
 		'text' => '',
 		'target' => '',
 		'class' => '',
@@ -415,7 +414,13 @@ function scwd_display_option_func( $atts ){
 			$tagTarget = ' target="' . $atts['target'] . '"';
 
 		if ( $atts['type'] == 'link' ){
-			$resultString = '<a href="' . $resultString . '"' . $tagClass . $tagTarget . '>' . (($atts['text'] != '') ? $atts['text']  : $resultString) . '</a>';
+			$linkUrl = $resultString;
+
+			if ( $atts['link_type'] ) {
+				$linkUrl = $atts['link_type'] == 'email' ? 'mailto:'.$linkUrl : 'tel:'.$linkUrl;
+			}
+
+			$resultString = '<a href="' . $linkUrl . '"' . $tagClass . $tagTarget . '>' . (($atts['text'] != '') ? $atts['text']  : $resultString) . '</a>';
 		} elseif ( $atts['type'] == 'image' ) {
 			$resultString = '<img src="' . $resultString . '" alt="' . $atts['text'] . '"' . $tagClass . '>';
 		}
