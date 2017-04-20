@@ -228,6 +228,8 @@ function scwd_scripts() {
 
 	/* Fonts */
 	wp_enqueue_style( 'scwd-google-fonts', '//fonts.googleapis.com/css?family=Open+Sans' );
+	// wp_enqueue_style( 'dashicons');
+	// wp_enqueue_style( 'scwd-genericons', 'https://cdnjs.cloudflare.com/ajax/libs/genericons/3.1/genericons.min.css' );
 	wp_enqueue_style( 'scwd-font-awesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css');
 
 	/* Load Stylesheets */

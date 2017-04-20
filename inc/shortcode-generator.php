@@ -38,23 +38,26 @@ function scwd_shortcode_generator_page() { ?>
 							<label for="variable-value">Variable Value</label>
 							<input type="text" name="variable_value" id="variable-value" class="form-control" readonly>
 						</div>
-						<div class="form-group">
-							<label for="wrapper">Wrapper</label>
-							<select name="wrapper" id="wrapper" class="form-control">
-								<option value="">Select Option</option>
-								<option value="p">p</option>
-								<option value="div">div</option>
-								<option value="li">li</option>
-								<option value="span">span</option>
-								<option value="strong">strong</option>
-								<option value="del">del</option>
-								<option value="ins">ins</option>
-							</select>
+						<div class="form-group clearfix row">
+							<div class="col-sm-6">
+								<label for="wrapper">Wrapper</label>
+								<select name="wrapper" id="wrapper" class="form-control">
+									<option value="">Select Option</option>
+									<option value="p">p</option>
+									<option value="div">div</option>
+									<option value="li">li</option>
+									<option value="span">span</option>
+									<option value="strong">strong</option>
+									<option value="del">del</option>
+									<option value="ins">ins</option>
+								</select>
+							</div>
+							<div class="col-sm-6 collapse">
+								<label for="wrapper-class">Wrapper Class</label>
+								<input type="text" name="wrapper_class" id="wrapper-class" class="form-control">
+							</div>
 						</div>
-						<div class="form-group collapse">
-							<label for="wrapper-class">Wrapper Class</label>
-							<input type="text" name="wrapper_class" id="wrapper-class" class="form-control">
-						</div>
+
 						<div class="form-group">
 							<label for="type">Type</label>
 							<select name="type" id="type" class="form-control">
@@ -73,34 +76,57 @@ function scwd_shortcode_generator_page() { ?>
 									<option value="phone">Phone</option>
 								</select>
 							</div>
-							<div class="form-group">
-								<label for="link-class">Class</label>
-								<input type="text" name="link_class" id="link-class" class="form-control">
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<label for="link-class">Class</label>
+									<input type="text" name="link_class" id="link-class" class="form-control">
+								</div>
+								<div class="col-sm-6">
+									<label for="text-link">Text Link</label>
+									<input type="text" name="text_link" id="text-link" class="form-control">
+								</div>
 							</div>
 							<div class="form-group">
-								<label for="text-link">Text Link</label>
-								<input type="text" name="text_link" id="text-link" class="form-control">
+								<label for="icon">Icon</label>
+								<!-- <div class="input-group">
+									<input type="text" name="icon" id="icon" class="icon-picker form-control" data-placement="bottomRight" />
+									<span class="input-group-addon"></span>
+								</div> -->
+								<input class="regular-text" type="hidden" id="icon-picker" name="icon" value="<?php if( isset( $options['icon1'] ) ) { echo esc_attr( $options['icon1'] ); } ?>"/>
+								<div data-target="#icon-picker" class="button icon-picker <?php if( isset( $options['icon1'] ) ) { $v=explode('|',$options['icon1']); echo $v[0].' '.$v[1]; } ?>"></div>
 							</div>
-							<div class="form-group">
-								<label for="target">Target</label>
-								<select name="target" id="target" class="form-control">
-									<option value="">None</option>
-									<option value="_blank">blank</option>
-									<option value="_self">self</option>
-									<option value="_parent">parent</option>
-									<option value="_top">top</option>
-								</select>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<label for="icon-position">Icon Position</label>
+									<select name="icon_position" id="icon-position" class="form-control">
+										<option value="before">Before</option>
+										<option value="after">After</option>
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<label for="target">Target</label>
+									<select name="target" id="target" class="form-control">
+										<option value="">None</option>
+										<option value="_blank">blank</option>
+										<option value="_self">self</option>
+										<option value="_parent">parent</option>
+										<option value="_top">top</option>
+									</select>
+								</div>
 							</div>
 						</div>
 
 						<div id="img-fields" class="additional-fields collapse">
-							<div class="form-group">
-								<label for="img-class">Class</label>
-								<input type="text" id="img-class" name="img_class" class="form-control">
-							</div>
-							<div class="form-group">
-								<label for="alttext">Alt Text</label>
-								<input type="text" name="alttext" id="alttext" class="form-control">
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<label for="img-class">Class</label>
+									<input type="text" id="img-class" name="img_class" class="form-control">
+								</div>
+								<div class="col-sm-6">
+									<label for="alttext">Alt Text</label>
+									<input type="text" name="alttext" id="alttext" class="form-control">
+								</div>
 							</div>
 						</div>
 
@@ -126,14 +152,25 @@ function scwd_shortcode_generator_page() { ?>
 <?php }
 
 function scwd_shortcode_generator_enqueue_scripts() {
-	wp_register_script( 'scwd-admin-scripts', get_template_directory_uri() .'/assets/js/admin-scripts.js', array('jquery') );
+	wp_register_script( 'scwd-bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array('jquery'), '', true );
+	// wp_register_script( 'scwd-fontaweseom-iconpicker', get_template_directory_uri() .'/assets/js/fontawesome-iconpicker.min.js', array('jquery'),'', true  );
+	wp_register_script( 'scwd-icon-picker', get_template_directory_uri() .'/assets/js/icon-picker.js', array('jquery'),'', true  );
+	wp_register_script( 'scwd-admin-scripts', get_template_directory_uri() .'/assets/js/admin-scripts.js', array('jquery'),'', true  );
 
 	if ( 'appearance_page_scwd_shortcode_generator' == get_current_screen()->id ) {
-		wp_enqueue_script('scwd-admin-scripts');
+		wp_enqueue_script( 'scwd-bootstrap' );
+		// wp_enqueue_script( 'scwd-fontaweseom-iconpicker' );
+		wp_enqueue_script( 'scwd-icon-picker' );
+		wp_enqueue_script( 'scwd-admin-scripts' );
 
 		//Enqueue the jQuery UI theme css file from google:
-		wp_enqueue_style('scwd-bootstrao-iso', get_template_directory_uri() .'/assets/css/bootstrap-iso.css');
-		wp_enqueue_style('scwd-admin-styles', get_template_directory_uri() .'/assets/css/admin-styles.css');
+		wp_enqueue_style( 'dashicons');
+		wp_enqueue_style( 'scwd-genericons', 'https://cdnjs.cloudflare.com/ajax/libs/genericons/3.1/genericons.min.css' );
+		wp_enqueue_style( 'scwd-font-awesome', get_template_directory_uri() . '/assets/css/font-awesome.min.css' );
+		wp_enqueue_style( 'scwd-bootstrao-iso', get_template_directory_uri() .'/assets/css/bootstrap-iso.css' );
+		// wp_enqueue_style( 'scwd-fontaweseom-iconpicker', get_template_directory_uri() .'/assets/css/fontawesome-iconpicker.min.css' );
+		wp_enqueue_style( 'scwd-icon-picker', get_template_directory_uri() .'/assets/css/icon-picker.css' );
+		wp_enqueue_style( 'scwd-admin-styles', get_template_directory_uri() .'/assets/css/admin-styles.css' );
 	}
 
 }

@@ -56,11 +56,11 @@ function scwd_customize_register( $wp_customize ) {
 	$wp_customize->get_section( 'title_tagline' )->priority = 10;
 
 	/*// logo uploader
-	$wp_customize->add_setting( 'scwd_logo', array( 'default' => null ) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'scwd_logo', array(
+	$wp_customize->add_setting( 'logo', array( 'default' => null ) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'logo', array(
 		'label'		=> __( 'Custom Site Logo (replaces title)', 'scwd' ),
 		'section'	=> 'title_tagline',
-		'settings'	=> 'scwd_logo',
+		'settings'	=> 'logo',
 		'priority'	=> 10
 	) ) );*/
 
@@ -105,7 +105,7 @@ function scwd_customize_register( $wp_customize ) {
 	));
 
 	/* General Options */
-	$wp_customize->add_section( 'scwd_general_section', array(
+	$wp_customize->add_section( 'general_section', array(
 		'title'			=> __( 'General Options', 'scwd' ),
 		'description'	=> 'Adjust the display of general options on your website.',
 		'panel' 		=> 'theme_options',
@@ -119,7 +119,7 @@ function scwd_customize_register( $wp_customize ) {
 	) );
 	$wp_customize->add_control( 'phone', array(
 		'label'		=> __( 'Phone Number', 'scwd' ),
-		'section'	=> 'scwd_general_section',
+		'section'	=> 'general_section',
 		'settings'	=> 'phone',
 		'priority'	=> 10,
 	) );
@@ -131,13 +131,13 @@ function scwd_customize_register( $wp_customize ) {
 	) );
 	$wp_customize->add_control( 'email', array(
 		'label'		=> __( 'Email Address', 'scwd' ),
-		'section'	=> 'scwd_general_section',
+		'section'	=> 'general_section',
 		'settings'	=> 'email',
 		'priority'	=> 20,
 	) );
 
 	/* Footer Options */
-	$wp_customize->add_section( 'scwd_footer_section', array(
+	$wp_customize->add_section( 'footer_section', array(
 		'title'			=> __( 'Footer Options', 'scwd' ),
 		'description'	=> 'Adjust the display of footer options on your website.',
 		'panel' 		=> 'theme_options',
@@ -148,7 +148,7 @@ function scwd_customize_register( $wp_customize ) {
 	$wp_customize->add_setting( 'footer_logo', array( 'default' => null ) );
 	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'footer_logo', array(
 		'label'		=> __( 'Footer Logo', 'scwd' ),
-		'section'	=> 'scwd_footer_section',
+		'section'	=> 'footer_section',
 		'settings'	=> 'footer_logo',
 		'priority'	=> 80
 	) ) );
@@ -157,7 +157,7 @@ function scwd_customize_register( $wp_customize ) {
 	$wp_customize->add_setting( 'payment_cards', array( 'default' => null ) );
 	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'payment_cards', array(
 		'label'		=> __( 'Payment Cards', 'scwd' ),
-		'section'	=> 'scwd_footer_section',
+		'section'	=> 'footer_section',
 		'settings'	=> 'payment_cards',
 		'priority'	=> 90
 	) ) );
@@ -171,7 +171,7 @@ function scwd_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control( new scwd_Customize_Textarea_Control( $wp_customize, 'copyright', array(
 		'label'			=> __( 'Copyright', 'scwd' ),
-		'section'		=> 'scwd_footer_section',
+		'section'		=> 'footer_section',
 		'priority'		=> 100,
 		// 'description'	=> __( 'Displays tagline, site title, copyright, and year by default. Allowed tags: <img>, <a>, <div>, <span>, <blockquote>, <p>, <em>, <strong>, <form>, <input>, <br>, <s>, <i>, <b>', 'scwd' ),
 	) ) );
@@ -383,12 +383,14 @@ function scwd_display_option_func( $atts ){
 	$atts = shortcode_atts( array(
 		'var' => '',
 		'type' => 'text',
-		'link_type' => '',
 		'text' => '',
 		'target' => '',
 		'class' => '',
 		'wrapper' => '',
-		'wclass' => ''
+		'wclass' => '',
+		'link_type' => '',
+		'icon' => '',
+		'icon_position' => ''
 	), $atts, 'scwd_option' );
 
 	// $theme_options = get_option( 'custom_theme_options' );
@@ -415,12 +417,20 @@ function scwd_display_option_func( $atts ){
 
 		if ( $atts['type'] == 'link' ){
 			$linkUrl = $resultString;
-
+			$icon = '';
 			if ( $atts['link_type'] ) {
 				$linkUrl = $atts['link_type'] == 'email' ? 'mailto:'.$linkUrl : 'tel:'.$linkUrl;
 			}
 
 			$resultString = '<a href="' . $linkUrl . '"' . $tagClass . $tagTarget . '>' . (($atts['text'] != '') ? $atts['text']  : $resultString) . '</a>';
+
+			if ( $atts['icon'] ) {
+				$value = explode('|', $atts['icon']); //--> array([0]=>'fa',[1]=>'fa-inbox');
+				$font = $value[0];
+				$icon = $value[1];
+				$icon = '<i class="'.$font.' '.$icon.'"></i>';
+				$resultString = $atts['icon_position'] !== 'before' ? $resultString.$icon : $icon.$resultString;
+			}
 		} elseif ( $atts['type'] == 'image' ) {
 			$resultString = '<img src="' . $resultString . '" alt="' . $atts['text'] . '"' . $tagClass . '>';
 		}
