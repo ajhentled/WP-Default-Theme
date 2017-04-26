@@ -112,6 +112,11 @@ function scwd_register_required_plugins() {
 			'required'	=> false,
 		),
 		array(
+			'name'		=> 'Customize Posts',
+			'slug'		=> 'customize-posts',
+			'required'	=> false,
+		),
+		array(
 			'name'		=> 'Wordfence Security',
 			'slug'		=> 'wordfence',
 			'required'	=> false,

@@ -172,6 +172,5 @@ function scwd_shortcode_generator_enqueue_scripts() {
 		wp_enqueue_style( 'scwd-icon-picker', get_template_directory_uri() .'/assets/css/icon-picker.css' );
 		wp_enqueue_style( 'scwd-admin-styles', get_template_directory_uri() .'/assets/css/admin-styles.css' );
 	}
-
 }
 add_action('admin_enqueue_scripts', 'scwd_shortcode_generator_enqueue_scripts');
