@@ -26,6 +26,8 @@
 			</div><!-- .navigation-top -->
 		<?php endif; ?>
 
+		<?php get_template_part( 'components/footer/site', 'info' ); ?>
+
 	</footer>
 
 </div>

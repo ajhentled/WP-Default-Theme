@@ -18,7 +18,7 @@ get_header(); ?>
 			<?php
 			while ( have_posts() ) : the_post();
 
-				get_template_part( 'components/page/content', 'page' );
+				get_template_part( 'components/page/content', 'page-front' );
 
 			endwhile; // End of the loop.
 			?>

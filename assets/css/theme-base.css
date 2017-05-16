@@ -744,7 +744,7 @@ body {
 
 @media screen and (min-width: 37.5em) {
     .content-area {
-      float: left;
+      /*float: left;*/
       /*margin: 0 -25% 0 0;*/
       /*width: 100%;*/
     }
