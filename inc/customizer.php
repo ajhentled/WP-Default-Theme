@@ -181,6 +181,26 @@ function scwd_customize_register( $wp_customize ) {
 		'render_callback'	=> 'scwd_customize_partial_copyright',
 	) );
 
+	/* Page Links Options */
+	$wp_customize->add_section( 'page_links_section', array(
+		'title'			=> __( 'Page Links', 'scwd' ),
+		// 'description'	=> 'Adjust the display of general options on your website.',
+		'panel' 		=> 'theme_options',
+		'priority'		=> 30,
+	) );
+
+	$wp_customize->add_setting( 'sample_page_link', array(
+		'capability' => 'edit_theme_options',
+		'sanitize_callback' => 'scwd_sanitize_dropdown_pages'
+	) );
+
+	$wp_customize->add_control( 'sample_page_link', array(
+		'type' => 'dropdown-pages',
+		'section' => 'page_links_section',
+		'label' => __( 'Sample Page Link' ),
+		'description' => __( 'This is a custom dropdown pages option.' ),
+	) );
+
 }
 add_action( 'customize_register', 'scwd_customize_register' );
 
@@ -310,6 +330,17 @@ function scwd_sanitize_textarea( $input ) {
 }
 
 /**
+ * Sanitize dropdown pages
+ */
+function scwd_sanitize_dropdown_pages( $page_id, $setting ) {
+  // Ensure $input is an absolute integer.
+  $page_id = absint( $page_id );
+
+  // If $page_id is an ID of a published page, return it; otherwise, return the default.
+  return ( 'publish' == get_post_status( $page_id ) ? $page_id : $setting->default );
+}
+
+/**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function scwd_customize_preview_js() {
@@ -408,6 +439,11 @@ function scwd_display_option_func( $atts ){
 		$tagTarget = '';
 		$wrapperClass = '';
 
+		// Check if result have [YEAR]
+		if ( strpos( $resultString, '[YEAR]' ) ) {
+			$resultString = str_replace('[YEAR]', date('Y'), $resultString);
+		}
+
 		// Build tag class string
 		if ( $atts['class'] != '' )
 			$tagClass = ' class="' . $atts['class'] . '"';
@@ -419,7 +455,21 @@ function scwd_display_option_func( $atts ){
 			$linkUrl = $resultString;
 			$icon = '';
 			if ( $atts['link_type'] ) {
-				$linkUrl = $atts['link_type'] == 'email' ? 'mailto:'.$linkUrl : 'tel:'.$linkUrl;
+				switch ( $atts['link_type'] ) {
+					case 'email':
+						$linkUrl = 'mailto:' . $linkUrl;
+						break;
+
+					case 'phone':
+						$linkUrl = 'tel:' . $linkUrl;
+
+					case 'page-link':
+						$linkUrl = get_permalink( $linkUrl );
+
+					default:
+						$linkUrl = '#';
+						break;
+				}
 			}
 
 			$resultString = '<a href="' . $linkUrl . '"' . $tagClass . $tagTarget . '>' . (($atts['text'] != '') ? $atts['text']  : $resultString) . '</a>';
@@ -442,7 +492,7 @@ function scwd_display_option_func( $atts ){
 		if($atts['wclass'] != '')
 			$wrapperClass = ' class="' . $atts['wclass'] . '"';
 
-		if ( $atts['wrapper'] == 'p' ){
+		/*if ( $atts['wrapper'] == 'p' ){
 			$resultString = '<p' . $wrapperClass . '>' . $resultString . '</p>';
 		} elseif ( $atts['wrapper'] == 'div' ) {
 			$resultString = '<div' . $wrapperClass . '>' . $resultString . '</div>';
@@ -452,6 +502,11 @@ function scwd_display_option_func( $atts ){
 			$resultString = '<span' . $wrapperClass . '>' . $resultString . '</span>';
 		} elseif ( $atts['wrapper'] == 'strong' ) {
 			$resultString = '<strong' . $wrapperClass . '>' . $resultString . '</strong>';
+		}*/
+
+		if ( $atts['wrapper'] ) {
+			$wrapper = $atts['wrapper'];
+			$resultString = "<{$wrapper} {$wrapperClass}> {$resultString} </{$wrapper}>";
 		}
 	}
 

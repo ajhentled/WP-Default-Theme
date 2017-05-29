@@ -41,8 +41,11 @@ function scwd_shortcode_generator_page() { ?>
 						<div class="form-group clearfix row">
 							<div class="col-sm-6">
 								<label for="wrapper">Wrapper</label>
-								<select name="wrapper" id="wrapper" class="form-control">
+								<!-- <select name="wrapper" id="wrapper" class="form-control">
 									<option value="">Select Option</option>
+									<option value="h1">h1</option>
+									<option value="h2">h2</option>
+									<option value="h3">h3</option>
 									<option value="p">p</option>
 									<option value="div">div</option>
 									<option value="li">li</option>
@@ -50,7 +53,8 @@ function scwd_shortcode_generator_page() { ?>
 									<option value="strong">strong</option>
 									<option value="del">del</option>
 									<option value="ins">ins</option>
-								</select>
+								</select> -->
+								<input type="text" name="wrapper" id="wrapper" class="form-control">
 							</div>
 							<div class="col-sm-6 collapse">
 								<label for="wrapper-class">Wrapper Class</label>
@@ -74,6 +78,7 @@ function scwd_shortcode_generator_page() { ?>
 									<option value="">None</option>
 									<option value="email">Email</option>
 									<option value="phone">Phone</option>
+									<option value="page-link">Page Link</option>
 								</select>
 							</div>
 							<div class="form-group row">
