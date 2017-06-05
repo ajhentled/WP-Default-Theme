@@ -1086,6 +1086,8 @@ object {
 
 .gallery-item {
   display: inline-block;
+  float: left;
+  margin: 15px 0;
   text-align: center;
   vertical-align: top;
   width: 100%;
