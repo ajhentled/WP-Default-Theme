@@ -462,9 +462,11 @@ function scwd_display_option_func( $atts ){
 
 					case 'phone':
 						$linkUrl = 'tel:' . $linkUrl;
+						break;
 
 					case 'page-link':
 						$linkUrl = get_permalink( $linkUrl );
+						break;
 
 					default:
 						$linkUrl = '#';

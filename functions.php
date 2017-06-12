@@ -225,7 +225,6 @@ add_action( 'widgets_init', 'scwd_widgets_init' );
  * Enqueue scripts and styles.
  */
 function scwd_scripts() {
-
 	/* Fonts */
 	wp_enqueue_style( 'scwd-google-fonts', '//fonts.googleapis.com/css?family=Open+Sans' );
 	// wp_enqueue_style( 'dashicons');
@@ -257,6 +256,26 @@ function scwd_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'scwd_scripts' );
+
+/**
+ * Getting rid of archive “label”
+ */
+function scwd_archive_title( $title ) {
+	if ( is_category() ) {
+		$title = single_cat_title( '', false );
+	} elseif ( is_tag() ) {
+		$title = single_tag_title( '', false );
+	} elseif ( is_author() ) {
+		$title = '<span class="vcard">' . get_the_author() . '</span>';
+	} elseif ( is_post_type_archive() ) {
+		$title = post_type_archive_title( '', false );
+	} elseif ( is_tax() ) {
+		$title = single_term_title( '', false );
+	}
+
+	return $title;
+}
+add_filter( 'get_the_archive_title', 'scwd_archive_title' );
 
 /**
  * Enable shortcodes in text widgets.
@@ -306,4 +325,4 @@ require get_template_directory() . '/inc/engagewp-plugins.php';
 /**
  * Create custom post types and taxomy.
  */
-// require get_template_directory() . '/inc/custom-post-types.php';
+require get_template_directory() . '/inc/custom-post-types.php';
