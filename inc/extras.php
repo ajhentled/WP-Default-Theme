@@ -32,3 +32,51 @@ function scwd_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'scwd_body_classes' );
+
+
+/**
+ * Display news custom post type using shortcode.
+ *
+ * @param  array $atts [description]
+ * @return html
+ */
+function scwd_display_testimonials( $atts ) {
+	$atts = shortcode_atts( array(
+		'heading'   => '',
+		'link_text' => 'View All',
+		'limit'     => 10,
+		'orderby'   => 'date',
+		'order'     => 'DESC'
+	), $atts, 'scwd_testimonials' );
+
+	global $post;
+	$args = array (
+		'posts_per_page'   => $atts['limit'],
+		'orderby'          => $atts['orderby'],
+		'order'            => $atts['order'],
+		'post_type'        => 'scwd_news',
+		'post_status'      => 'publish',
+	);
+
+	$news = get_posts( $args );
+
+	ob_start(); ?>
+	<div class="news-list post-block-list">
+		<?php if ( $atts['heading'] !== '' ): ?>
+			<h3 class="heading"><?php echo $atts['heading']; ?></h3>
+		<?php endif ?>
+
+		<?php foreach ( $news as $post ):
+			setup_postdata( $post );
+			get_template_part( 'components/post/content', 'testimonial-block' );
+		endforeach ?>
+	</div>
+	<?php if ( wp_count_posts( 'scwd_news' )->publish > count( $news ) ): ?>
+		<a href="<?php echo get_post_type_archive_link( 'scwd_news' ) ?>" class="box-btn"><?php echo $atts['link_text'] ?></a>
+	<?php endif ?>
+
+	<?php
+	$content = ob_get_clean();
+	return $content;
+}
+add_shortcode( 'scwd_testimonials', 'scwd_display_testimonials' );
