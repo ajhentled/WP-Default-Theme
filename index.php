@@ -13,41 +13,48 @@
  */
 
 get_header(); ?>
-	<div id="primary" class="content-area col-sm-8">
-		<main id="main" class="site-main" role="main">
 
-		<?php
-		if ( have_posts() ) :
+<div class="container-fluid">
+	<div class="row">
+		<div id="primary" class="content-area col-sm-8">
+			<main id="main" class="site-main">
 
-			if ( is_home() && ! is_front_page() ) : ?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
 			<?php
-			endif;
+			if ( have_posts() ) :
 
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+				if ( is_home() && ! is_front_page() ) : ?>
+					<header>
+						<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+					</header>
+				<?php
+				endif;
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'components/post/content', get_post_format() );
+				/* Start the Loop */
+				while ( have_posts() ) : the_post();
 
-			endwhile;
+					/*
+					 * Include the Post-Format-specific template for the content.
+					 * If you want to override this in a child theme, then include a file
+					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+					 */
+					get_template_part( 'components/post/content', get_post_format() );
 
-			the_posts_navigation();
+				endwhile;
 
-		else :
+				the_posts_navigation();
 
-			get_template_part( 'components/post/content', 'none' );
+			else :
 
-		endif; ?>
+				get_template_part( 'components/post/content', 'none' );
 
-		</main>
-	</div>
-<?php
-get_sidebar();
-get_footer();
+			endif; ?>
+
+			</main>
+		</div>
+
+		<?php get_sidebar(); ?>
+
+	</div><!-- .row -->
+</div><!-- .container-fluid -->
+
+<?php get_footer(); ?>

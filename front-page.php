@@ -12,21 +12,25 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area col-sm-12">
-		<main id="main" class="site-main" role="main">
+<div class="container-fluid">
+	<div class="row">
+		<div id="primary" class="content-area col-sm-12">
+			<main id="main" class="site-main" role="main">
 
-			<?php
-			while ( have_posts() ) : the_post();
+				<?php
+				while ( have_posts() ) : the_post();
 
-				get_template_part( 'components/page/content', 'page-front' );
+					get_template_part( 'components/page/content', 'page-front' );
 
-			endwhile; // End of the loop.
-			?>
+				endwhile; // End of the loop.
+				?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+			</main><!-- #main -->
+		</div><!-- #primary -->
 
-<?php
-// get_sidebar();
+		<?php // get_sidebar(); ?>
 
-get_footer();
+	</div><!-- .row -->
+</div><!-- .container-fluid -->
+
+<?php get_footer(); ?>
