@@ -10,13 +10,11 @@
  */
 
 ?>
-			</div><!-- .row -->
-		</div><!-- .container-fluid -->
 	</div><!-- .site-content -->
 
 	<?php get_template_part( 'components/page/content', 'page-bottom' ); ?>
 
-	<footer id="colophon" class="site-footer main" role="contentinfo">
+	<footer id="colophon" class="site-footer main">
 
 		<?php if ( has_nav_menu( 'bottom' ) ) : ?>
 			<div class="navigation-bottom">
@@ -30,7 +28,8 @@
 
 	</footer>
 
-</div>
+</div><!-- .site -->
+
 <?php wp_footer(); ?>
 
 </body>

@@ -21,4 +21,4 @@
 		<?php the_excerpt(); ?>
 	</div>
 	<?php get_template_part( 'components/post/content', 'footer' ); ?>
-</article>
+</article><!-- #post-<?php the_ID(); ?> -->

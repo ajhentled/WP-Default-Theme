@@ -49,7 +49,7 @@ function scwd_setup() {
 		'top' => esc_html__( 'Top Menu', 'scwd' ),
 		'bottom' => esc_html__( 'Bottom Menu', 'scwd' ),
 		'social' => esc_html__( 'Social Links Menu', 'scwd' ),
-		) );
+	) );
 
 	/**
 	 * Add support for core custom logo.
@@ -278,6 +278,16 @@ function scwd_archive_title( $title ) {
 add_filter( 'get_the_archive_title', 'scwd_archive_title' );
 
 /**
+ * Add a pingback url auto-discovery header for singularly identifiable articles.
+ */
+function scwd_pingback_header() {
+	if ( is_singular() && pings_open() ) {
+		echo '<link rel="pingback" href="', esc_url( get_bloginfo( 'pingback_url' ) ), '">';
+	}
+}
+ add_action( 'wp_head', 'scwd_pingback_header' );
+
+/**
  * Enable shortcodes in text widgets.
  */
 // add_filter('widget_text','do_shortcode');
@@ -295,7 +305,7 @@ require get_template_directory() . '/inc/template-tags.php';
 /**
  * Custom functions that act independently of the theme templates.
  */
-require get_template_directory() . '/inc/extras.php';
+require get_template_directory() . '/inc/template-functions.php';
 
 /**
  * Customizer additions.
