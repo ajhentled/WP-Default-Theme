@@ -39,11 +39,11 @@ a:hover { color: #19B798; text-decoration: none; }
 /*--------------------------------------------------------------
 # Layout
 --------------------------------------------------------------*/
-.site { margin: 0 auto; max-width: 1920px; }
+.site { margin: 0 auto; /*max-width: 1920px;*/ }
 
 .full { width: 100%; }
-.main { max-width: 1920px; }
-.container, .container-fluid { max-width: 1200px; }
+.main { margin: auto; max-width: 1920px; }
+.container-fluid { max-width: 1200px; }
 
 /*--------------------------------------------------------------
 # Header

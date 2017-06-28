@@ -1,5 +1,5 @@
 <?php if ( has_nav_menu( 'social' ) ) : ?>
-	<nav class="social-navigation" role="navigation" aria-label="<?php _e( 'Footer Social Links Menu', 'scwd' ); ?>">
+	<nav class="social-navigation" aria-label="<?php _e( 'Footer Social Links Menu', 'scwd' ); ?>">
 		<?php
 			wp_nav_menu( array(
 				'theme_location' => 'social',

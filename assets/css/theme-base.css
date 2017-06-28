@@ -754,7 +754,7 @@ body {
     }
 
     .site-content .widget-area {
-      float: right;
+      /*float: right;*/
       /*overflow: hidden;*/
       /*width: 25%;*/
     }
