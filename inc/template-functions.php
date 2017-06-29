@@ -68,6 +68,7 @@ function scwd_display_testimonials( $atts ) {
 			setup_postdata( $post );
 			get_template_part( 'components/post/content', 'testimonial-block' );
 		endforeach ?>
+		<?php wp_reset_postdata(); ?>
 	</div>
 	<?php if ( wp_count_posts( 'scwd_news' )->publish > count( $news ) ): ?>
 		<a href="<?php echo get_post_type_archive_link( 'scwd_news' ) ?>" class="box-btn"><?php echo $atts['link_text'] ?></a>
