@@ -19,7 +19,7 @@ function scwd_setup() {
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
-	 * If you're building a theme based on components, use a find and replace
+	 * If you're building a theme based on _s, use a find and replace
 	 * to change 'scwd' to the name of your theme in all the template files.
 	 */
 	load_theme_textdomain( 'scwd', get_template_directory() . '/languages' );
@@ -303,7 +303,7 @@ function scwd_pingback_header() {
 require get_template_directory() . '/inc/template-tags.php';
 
 /**
- * Custom functions that act independently of the theme templates.
+ * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
 
