@@ -27,7 +27,7 @@
 			}
 
 		if ( 'post' === get_post_type() ) : ?>
-		<?php get_template_part( 'components/post/content', 'meta' ); ?>
+		<?php get_template_part( 'template-parts/post/content', 'meta' ); ?>
 		<?php
 		endif; ?>
 	</header>
@@ -52,5 +52,5 @@
 			) );
 		?>
 	</div>
-	<?php get_template_part( 'components/post/content', 'footer' ); ?>
+	<?php get_template_part( 'template-parts/post/content', 'footer' ); ?>
 </article><!-- #post-<?php the_ID(); ?> -->

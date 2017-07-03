@@ -66,7 +66,7 @@ function scwd_display_testimonials( $atts ) {
 
 		<?php foreach ( $news as $post ):
 			setup_postdata( $post );
-			get_template_part( 'components/post/content', 'testimonial-block' );
+			get_template_part( 'template-parts/post/content', 'testimonial-block' );
 		endforeach ?>
 		<?php wp_reset_postdata(); ?>
 	</div>

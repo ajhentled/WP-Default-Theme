@@ -12,19 +12,19 @@
 ?>
 	</div><!-- .site-content -->
 
-	<?php get_template_part( 'components/page/content', 'page-bottom' ); ?>
+	<?php get_template_part( 'template-parts/page/content', 'page-bottom' ); ?>
 
 	<footer id="colophon" class="site-footer main">
 
 		<?php if ( has_nav_menu( 'bottom' ) ) : ?>
 			<div class="navigation-bottom">
 				<div class="container-fluid wrap">
-					<?php get_template_part( 'components/navigation/navigation', 'bottom' ); ?>
+					<?php get_template_part( 'template-parts/navigation/navigation', 'bottom' ); ?>
 				</div><!-- .wrap -->
 			</div><!-- .navigation-top -->
 		<?php endif; ?>
 
-		<?php get_template_part( 'components/footer/site', 'info' ); ?>
+		<?php get_template_part( 'template-parts/footer/site', 'info' ); ?>
 
 	</footer>
 

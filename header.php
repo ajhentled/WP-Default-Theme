@@ -30,10 +30,10 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<?php scwd_the_custom_logo(); ?>
-					<?php get_template_part( 'components/header/site', 'branding' ); ?>
+					<?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
 				</div>
 				<div class="col-sm-6">
-					<?php get_template_part( 'components/navigation/navigation', 'social' ); ?>
+					<?php get_template_part( 'template-parts/navigation/navigation', 'social' ); ?>
 				</div>
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 		<?php if ( has_nav_menu( 'top' ) ) : ?>
 			<div class="navigation-top">
 				<div class="container-fluid wrap">
-					<?php get_template_part( 'components/navigation/navigation', 'top' ); ?>
+					<?php get_template_part( 'template-parts/navigation/navigation', 'top' ); ?>
 				</div><!-- .wrap -->
 			</div><!-- .navigation-top -->
 		<?php endif; ?>
@@ -53,6 +53,6 @@
 		</div><!-- .widget-area -->
 	<?php endif; ?>
 
-	<?php get_template_part( 'components/page/content', 'page-top' ) ?>
+	<?php get_template_part( 'template-parts/page/content', 'page-top' ) ?>
 
 	<div id="content" class="site-content main">
