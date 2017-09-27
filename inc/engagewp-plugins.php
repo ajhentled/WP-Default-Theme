@@ -121,6 +121,11 @@ function scwd_register_required_plugins() {
 			'slug'		=> 'wordfence',
 			'required'	=> false,
 		),
+		array(
+			'name'		=> 'Easy WP SMTP',
+			'slug'		=> 'easy-wp-smtp',
+			'required'	=> false,
+		),
 		/*array(
 			'name'		=> 'Better Search Replace',
 			'slug'		=> 'better-search-replace',
